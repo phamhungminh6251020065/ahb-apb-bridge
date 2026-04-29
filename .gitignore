@@ -1,0 +1,19 @@
+# Questa / simulation
+work/
+transcript
+*.log
+*.wlf
+
+# coverage
+*.ucdb
+
+# waveform
+*.vcd
+*.fsdb
+
+# temp
+temp/
+
+# OS
+.DS_Store
+Thumbs.db
