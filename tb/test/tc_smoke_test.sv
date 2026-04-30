@@ -38,7 +38,7 @@ class tc_smoke_test extends base_test;
         `uvm_info("SMOKE_TEST", "Smoke test completed", UVM_LOW)
 
         // Add delay to allow monitor/scoreboard to finish processing
-        #1000;
+        #100ns;
 
         phase.drop_objection(this);
     endtask

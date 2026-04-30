@@ -10,5 +10,5 @@ package ahb_pkg;
     // Các sequences
     `include "ahb_base_seq.sv"
     `include "smoke_seq.sv"
-    //`include "reset_all_regs_seq.sv"
+    `include "reset_all_regs_seq.sv"
 endpackage : ahb_pkg
