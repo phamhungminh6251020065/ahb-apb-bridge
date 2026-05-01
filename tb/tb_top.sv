@@ -16,26 +16,24 @@ module tb_top;
     import uvm_pkg::*;
     import test_pkg::*;
 
-    // ── Clock + Reset ────────────────────────────────────────────────────────
+    // ── Clock ────────────────────────────────
     logic HCLK;
-    logic HRESETn;
 
     initial begin
         HCLK = 0;
         forever #5 HCLK = ~HCLK;
     end
 
-    initial begin
-        HRESETn = 0;
-        #20 HRESETn = 1;
-    end
+    // ── Interface ────────────────────────────
+    ahb_if ahb_vif(.HCLK(HCLK));
+    apb_if apb_vif(.PCLK(HCLK), .PRESETn(ahb_vif.HRESETn));
 
-    // ── Interface ────────────────────────────────────────────────────────────
-    // AHB Master 1 interface (driven by UVM driver)
-    ahb_if ahb_vif(.HCLK(HCLK), .HRESETn(HRESETn));
-    
-    // APB interface (observed by APB monitor)
-    apb_if apb_vif(.PCLK(HCLK), .PRESETn(HRESETn));
+    // ── Reset drive (IMPORTANT) ──────────────
+    initial begin
+        ahb_vif.HRESETn = 0;
+        #20;
+        ahb_vif.HRESETn = 1;
+    end
 
     // ── GPIO + Timer signals (for observation) ───────────────────────────────
     logic [7:0]  GPIO_IN   = 8'b0;  // Test can drive GPIO inputs
@@ -46,7 +44,7 @@ module tb_top;
     dut_top dut (
         // Global
         .HCLK       (HCLK),
-        .HRESETn    (HRESETn),
+        .HRESETn    (ahb_vif.HRESETn),
         
         // AHB Master 1 (driven by UVM driver via ahb_vif)
         .HBUSREQ1   (ahb_vif.HBUSREQ),

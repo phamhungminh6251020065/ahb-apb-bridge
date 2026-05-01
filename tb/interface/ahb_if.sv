@@ -11,7 +11,10 @@
 //   Interface này được instantiate 2 lần trong tb_top: ahb_if_m1, ahb_if_m2.
 //==============================================================================
 
-interface ahb_if (input logic HCLK, input logic HRESETn);
+interface ahb_if (input logic HCLK);
+
+    // ── RESET (internal) ─────────────────────
+    logic HRESETn;
 
     // ── Master → Bus ─────────────────────────
     logic        HBUSREQ;
@@ -29,8 +32,8 @@ interface ahb_if (input logic HCLK, input logic HRESETn);
     logic        HREADY;
     logic [1:0]  HRESP;
 
-    // Alias for compatibility
-    logic        HREADYout;
+    // Alias
+    logic HREADYout;
     assign HREADYout = HREADY;
 
     // ── Driver ───────────────────────────────
@@ -59,7 +62,16 @@ interface ahb_if (input logic HCLK, input logic HRESETn);
         HSEL    = 0;
     endtask
 
-    // ── Wait until transfer completes ────────
+    // ── Reset DUT (UVM style) ────────────────
+    task reset_dut();
+        HRESETn <= 0;
+        reset_signals();
+        repeat (3) @(posedge HCLK);
+        HRESETn <= 1;
+        repeat (3) @(posedge HCLK);
+    endtask
+
+    // ── Wait ready ───────────────────────────
     task wait_ready();
         @(driver_cb);
         while (!driver_cb.HREADY) @(driver_cb);

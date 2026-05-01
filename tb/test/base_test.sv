@@ -34,6 +34,8 @@ class base_test extends uvm_test;
         uvm_config_db#(int)::set(this, "m_env.ahb_ag", "master_id", 0);
         uvm_config_db#(uvm_active_passive_enum)::set(this, "m_env.ahb_ag", "is_active", UVM_ACTIVE);
 
+        uvm_config_db#(virtual ahb_if)::set(this,"m_env.ahb_ag.sequencer", "vif", ahb_vif);
+
         // ── Config APB (passive) ───────────────────────────
         uvm_config_db#(virtual apb_if)::set(this, "m_env.apb_ag", "apb_vif", apb_vif);
         uvm_config_db#(uvm_active_passive_enum)::set(this, "m_env.apb_ag", "is_active", UVM_PASSIVE);

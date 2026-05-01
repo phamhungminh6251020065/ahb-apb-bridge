@@ -11,6 +11,8 @@
 
 class ahb_base_seq extends uvm_sequence #(ahb_trans);
     `uvm_object_utils(ahb_base_seq)
+    `uvm_declare_p_sequencer(ahb_sequencer)
+    virtual ahb_if vif;
 
     int unsigned master_id = 0;
 
@@ -58,11 +60,17 @@ class ahb_base_seq extends uvm_sequence #(ahb_trans);
 
         start_item(tr);
         finish_item(tr);
+        vif.wait_ready();
 
         if (tr.hresp != 2'b00)
             `uvm_error("AHB_SEQ", "Read error response")
 
         rdata = tr.hrdata;
+    endtask
+
+    task do_reset();
+        `uvm_info("SEQ", "Applying RESET", UVM_LOW)
+        vif.reset_dut();
     endtask
 
 endclass

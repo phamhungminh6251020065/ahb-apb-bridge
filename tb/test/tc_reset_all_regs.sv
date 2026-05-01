@@ -13,7 +13,7 @@ class tc_reset_all_regs extends base_test;
         `uvm_info("RESET_TEST", "Starting RESET ALL REGS test", UVM_LOW)
 
         m_seq = reset_all_regs_seq::type_id::create("m_seq");
-
+         m_seq.vif = ahb_vif;
         // chạy sequence trên AHB sequencer
         m_seq.start(m_env.ahb_ag.sequencer);
 
