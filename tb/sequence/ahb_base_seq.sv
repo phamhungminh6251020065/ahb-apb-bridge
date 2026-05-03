@@ -60,7 +60,6 @@ class ahb_base_seq extends uvm_sequence #(ahb_trans);
 
         start_item(tr);
         finish_item(tr);
-        vif.wait_ready();
 
         if (tr.hresp != 2'b00)
             `uvm_error("AHB_SEQ", "Read error response")
