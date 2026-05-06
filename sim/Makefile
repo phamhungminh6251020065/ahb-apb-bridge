@@ -60,13 +60,25 @@ wave:
 #      -l $(WAVE_DIR)/$(TEST)_wave.log \
 #      $(WORK).$(TOP) $(SIM_OPTIONS)
 
-	vsim -coverage \
+# 	vsim -coverage \
+# 	     -sv_lib $(UVM_HOME)/win64/uvm_dpi \
+# 		 -debugdb=+acc \
+# 	     -uvmcontrol=all \
+# 	     -classdebug \
+# 	     -l $(WAVE_DIR)/$(TEST)_wave.log \
+# 	     $(WORK).$(TOP) $(SIM_OPTIONS)
+
+	vsim -wlf $(WAVE_DIR)/$(TEST).wlf \
+	     -coverage \
 	     -sv_lib $(UVM_HOME)/win64/uvm_dpi \
 		 -debugdb=+acc \
 	     -uvmcontrol=all \
 	     -classdebug \
 	     -l $(WAVE_DIR)/$(TEST)_wave.log \
 	     $(WORK).$(TOP) $(SIM_OPTIONS)
+
+rewave:
+	vsim -view $(WAVE_DIR)/$(TEST).wlf -do wave_$(TEST).do
 
 
 comp:
