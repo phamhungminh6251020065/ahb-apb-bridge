@@ -102,6 +102,6 @@ cov:
 
 clean:
 #	rm -rf $(WORK) $(COMP_DIR) $(SIM_DIR) $(WAVE_DIR) transcript
-	rm -rf $(WORK) $(COMP_DIR) $(SIM_DIR) $(WAVE_DIR) $(COV_DIR) transcript vsim.ucdb covhtmlreport *.log *.tcl *.vstf
+	rm -rf $(WORK) $(COMP_DIR) $(SIM_DIR) $(COV_DIR) transcript vsim.ucdb covhtmlreport *.log *.tcl *.vstf
 
 all:	clean comp sim
