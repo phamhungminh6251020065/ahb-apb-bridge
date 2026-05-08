@@ -11,7 +11,9 @@
 
 `timescale 1ns/1ps
 
-module tb_top;
+module tb_top #(
+    parameter ARBITER_MODE = 0  // 0: Fixed Priority, 1: Round Robin (can be overridden via plusargs in simulation command)
+);
 
     import uvm_pkg::*;
     import test_pkg::*;
@@ -25,52 +27,58 @@ module tb_top;
     end
 
     // ── Interface ────────────────────────────
-    ahb_if ahb_vif(.HCLK(HCLK));
-    apb_if apb_vif(.PCLK(HCLK), .PRESETn(ahb_vif.HRESETn));
+    ahb_if ahb_vif_m1(.HCLK(HCLK));
+    ahb_if ahb_vif_m2(.HCLK(HCLK));
+    apb_if apb_vif(.PCLK(HCLK), .PRESETn(ahb_vif_m1.HRESETn));
 
     // ── Reset drive (IMPORTANT) ──────────────
     initial begin
-        ahb_vif.HRESETn = 0;
+        ahb_vif_m1.reset_signals();
+        ahb_vif_m2.reset_signals();
+
+        ahb_vif_m1.HRESETn = 0;
+        ahb_vif_m2.HRESETn = 0;
         #20;
-        ahb_vif.HRESETn = 1;
+        ahb_vif_m1.HRESETn = 1;
+        ahb_vif_m2.HRESETn = 1;
     end
 
     // ── GPIO + Timer signals (for observation) ───────────────────────────────
-    logic [7:0]  GPIO_IN   = 8'b0;  // Test can drive GPIO inputs
-    logic [7:0]  GPIO_OUT;
-    logic        TIMER_IRQ;
+    logic [7:0] GPIO_IN  = 8'b0;
+    wire  [7:0] GPIO_OUT;
+    wire        TIMER_IRQ;
 
     // ── DUT instantiation ────────────────────────────────────────────────────
-    dut_top dut (
+    dut_top #(.ARBITER_MODE(ARBITER_MODE)) dut (
         // Global
         .HCLK       (HCLK),
-        .HRESETn    (ahb_vif.HRESETn),
+        .HRESETn    (ahb_vif_m1.HRESETn),
         
-        // AHB Master 1 (driven by UVM driver via ahb_vif)
-        .HBUSREQ1   (ahb_vif.HBUSREQ),
-        .HADDR1     (ahb_vif.HADDR),
-        .HWDATA1    (ahb_vif.HWDATA),
-        .HWRITE1    (ahb_vif.HWRITE),
-        .HTRANS1    (ahb_vif.HTRANS),
-        .HSIZE1     (ahb_vif.HSIZE),
-        .HBURST1    (ahb_vif.HBURST),
-        .HGRANT1    (ahb_vif.HGRANT),
-        .HRDATA1    (ahb_vif.HRDATA),
-        .HREADY1    (ahb_vif.HREADY),
-        .HRESP1     (ahb_vif.HRESP),
+        // AHB Master 1 (driven by UVM driver via ahb_vif_m1)
+        .HBUSREQ1   (ahb_vif_m1.HBUSREQ),
+        .HADDR1     (ahb_vif_m1.HADDR),
+        .HWDATA1    (ahb_vif_m1.HWDATA),
+        .HWRITE1    (ahb_vif_m1.HWRITE),
+        .HTRANS1    (ahb_vif_m1.HTRANS),
+        .HSIZE1     (ahb_vif_m1.HSIZE),
+        .HBURST1    (ahb_vif_m1.HBURST),
+        .HGRANT1    (ahb_vif_m1.HGRANT),
+        .HRDATA1    (ahb_vif_m1.HRDATA),
+        .HREADY1    (ahb_vif_m1.HREADY),
+        .HRESP1     (ahb_vif_m1.HRESP),
         
-        // AHB Master 2 (tied off for now — chỉ M1 active)
-        .HBUSREQ2   (1'b0),
-        .HADDR2     (32'b0),
-        .HWDATA2    (32'b0),
-        .HWRITE2    (1'b0),
-        .HTRANS2    (2'b00),
-        .HSIZE2     (3'b000),
-        .HBURST2    (3'b000),
-        .HGRANT2    (),
-        .HRDATA2    (),
-        .HREADY2    (),
-        .HRESP2     (),
+        // AHB Master 2 (driven by UVM driver via ahb_vif_m2)
+        .HBUSREQ2   (ahb_vif_m2.HBUSREQ),
+        .HADDR2     (ahb_vif_m2.HADDR),
+        .HWDATA2    (ahb_vif_m2.HWDATA),
+        .HWRITE2    (ahb_vif_m2.HWRITE),
+        .HTRANS2    (ahb_vif_m2.HTRANS),
+        .HSIZE2     (ahb_vif_m2.HSIZE),
+        .HBURST2    (ahb_vif_m2.HBURST),
+        .HGRANT2    (ahb_vif_m2.HGRANT),
+        .HRDATA2    (ahb_vif_m2.HRDATA),
+        .HREADY2    (ahb_vif_m2.HREADY),
+        .HRESP2     (ahb_vif_m2.HRESP),
         
         // GPIO
         .GPIO_IN    (GPIO_IN),
@@ -109,7 +117,9 @@ module tb_top;
 
     // ── Config DB setup ─────────────────────────────────────────────────────
     initial begin
-        uvm_config_db#(virtual ahb_if)::set(null, "*", "ahb_vif", ahb_vif);
+        uvm_config_db#(virtual ahb_if)::set(null, "*", "ahb_vif", ahb_vif_m1);
+        uvm_config_db#(virtual ahb_if)::set(null, "*", "ahb_vif_m1", ahb_vif_m1);
+        uvm_config_db#(virtual ahb_if)::set(null, "*", "ahb_vif_m2", ahb_vif_m2);
         uvm_config_db#(virtual apb_if)::set(null, "*", "apb_vif", apb_vif);
 
         run_test();

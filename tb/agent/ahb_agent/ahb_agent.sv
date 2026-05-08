@@ -30,6 +30,7 @@ class ahb_agent extends uvm_agent;
 
     function void build_phase(uvm_phase phase);
         uvm_active_passive_enum is_active;
+        string vif_key;
         super.build_phase(phase);
 
         // get master_id
@@ -39,9 +40,12 @@ class ahb_agent extends uvm_agent;
         if (!uvm_config_db#(uvm_active_passive_enum)::get(this, "", "is_active", is_active))
             is_active = UVM_ACTIVE;
 
+        // Build dynamic VIF key based on master_id: 0→ahb_vif_m1, 1→ahb_vif_m2
+        vif_key = $sformatf("ahb_vif_m%0d", master_id + 1);
+        
         // get vif
-        if (!uvm_config_db#(virtual ahb_if)::get(this, "", "ahb_vif_m1", vif))
-            `uvm_fatal("AHB_AGENT", "Cannot get ahb_vif_m1")
+        if (!uvm_config_db#(virtual ahb_if)::get(this, "", vif_key, vif))
+            `uvm_fatal("AHB_AGENT", $sformatf("Cannot get %s", vif_key))
 
         // create monitor
         monitor = ahb_monitor::type_id::create("monitor", this);

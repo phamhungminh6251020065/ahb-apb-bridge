@@ -23,17 +23,17 @@ class tc_smoke_test extends base_test;
     task run_phase(uvm_phase phase);
         phase.raise_objection(this);
 
-        `uvm_info("SMOKE_TEST", "Starting smoke test", UVM_LOW)
+        `uvm_info("SMOKE_TEST", "Starting smoke test on Master 1", UVM_LOW)
 
         // Create and start smoke sequence
         m_smoke_seq = smoke_seq::type_id::create("m_smoke_seq");
         m_smoke_seq.master_id = 0;  // Master 1
 
-        // Start sequence on AHB agent sequencer
+        // Start sequence on AHB Master 1 agent sequencer
         if (!m_smoke_seq.randomize())
             `uvm_error("SMOKE_TEST", "Failed to randomize smoke sequence")
 
-        m_smoke_seq.start(m_env.ahb_ag.sequencer);
+        m_smoke_seq.start(m_env.ahb_ag_m1.sequencer);
 
         `uvm_info("SMOKE_TEST", "Smoke test completed", UVM_LOW)
 

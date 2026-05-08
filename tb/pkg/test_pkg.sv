@@ -9,6 +9,9 @@ package test_pkg;
     // Test
     `include "base_test.sv"
     `include "tc_smoke_test.sv"
+    `include "tc_smoke_test_m2.sv"
+    `include "tc_smoke_test_rr.sv"
+    `include "tc_smoke_test_both.sv"
     `include "tc_reset_all_regs.sv"
 
 endpackage : test_pkg

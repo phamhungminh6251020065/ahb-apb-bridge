@@ -59,6 +59,8 @@ class scoreboard extends uvm_scoreboard;
         string type_str;
         string line;
         string result_str;
+        string master_str;
+        string slave_str;
         bit pass;
 
         logic [31:0] ahb_data;
@@ -110,8 +112,13 @@ class scoreboard extends uvm_scoreboard;
         end
 
         // SAVE LOG LINE (TABLE ROW)
-        line = $sformatf("| %8t | %-4s | %08h | %-5s | %08h | %08h | %-5s  |",
+        master_str = $sformatf("Master%0d", ahb_tr.master_id + 1);
+        slave_str  = apb_tr.get_slave_name();
+
+        line = $sformatf("| %8t | %-4s | %-6s  | %-4s | %08h | %-5s | %08h | %08h | %-5s  |",
                 t,
+                master_str,
+                slave_str,
                 "AHB",
                 ahb_tr.haddr,
                 type_str,
@@ -133,35 +140,45 @@ class scoreboard extends uvm_scoreboard;
         total = matched + failed + dropped;
 
         // HEADER
-        report_str = "\n=====================================================================\n";
-        report_str = {report_str, "                    SCOREBOARD SUMMARY TABLE\n"};
-        report_str = {report_str, "=====================================================================\n"};
-        report_str = {report_str, "|   TIME   | PROT |   ADDR   | TYPE  | AHB_DATA | APB_DATA | RESULT |\n"};
-        report_str = {report_str, "+----------+------+----------+-------+----------+----------+--------+\n"};
+        report_str = "\n==========================================================================================\n";
+        report_str = {report_str, "                             SCOREBOARD SUMMARY TABLE\n"};
+        report_str = {report_str, "==========================================================================================\n"};
+        report_str = {report_str, "|   TIME   | MASTER  |  SLAVE   | PROT |   ADDR   | TYPE  | AHB_DATA | APB_DATA | RESULT |\n"};
+        report_str = {report_str, "+----------+---------+----------+------+----------+-------+----------+----------+--------+\n"};
 
         // TABLE CONTENT
         for (i = 0; i < summary_q.size(); i++) begin
             report_str = {report_str, summary_q[i], "\n"};
         end
 
-        report_str = {report_str, "+----------+------+----------+-------+----------+----------+--------+\n"};
+        report_str = {report_str, "+----------+---------+----------+------+----------+-------+----------+----------+--------+\n"};
 
         // SUMMARY
         report_str = {report_str, $sformatf("TOTAL: %0d | PASS: %0d | FAIL: %0d | DROP: %0d\n",
                         total, matched, failed, dropped)};
-        report_str = {report_str, "=====================================================================\n\n"};
+        report_str = {report_str, "==========================================================================================\n\n"};
 
         // RESULT BANNER
         if (failed || dropped) begin
             report_str = {report_str,
-            "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-            "!!!            SIMULATION FAILED           !!!\n",
-            "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"};
+            "\n",
+            " _____         _     _____     _ _          _ _ \n",
+            "|_   _|__  ___| |_  |  ___|_ _(_) | ___  __| | |\n",
+            "  | |/ _ \\/ __| __| | |_ / _` | | |/ _ \\/ _` | |\n",
+            "  | |  __/\\__ \\ |_  |  _| (_| | | |  __/ (_| |_|\n",
+            "  |_|\\___||___/\\__| |_|  \\__,_|_|_|\\___|\\__,_(_)\n",
+            "\n"
+                };
         end else begin
             report_str = {report_str,
-            "**********************************************\n",
-            "***         SIMULATION PASSED              ***\n",
-            "**********************************************\n"};
+            "\n",
+            " _____         _     ____                        _ \n",
+            "|_   _|__  ___| |_  |  _ \\ __ _ ___ ___  ___  __| |\n",
+            "  | |/ _ \\/ __| __| | |_) / _` / __/ __|/ _ \\/ _` |\n",
+            "  | |  __/\\__ \\ |_  |  __/ (_| \\__ \\__ \\  __/ (_| |\n",
+            "  |_|\\___||___/\\__| |_|   \\__,_|___/___/\\___|\\__,_|\n",
+            "\n"
+                };
         end
 
         `uvm_info("SB_REPORT", report_str, UVM_LOW)
@@ -171,115 +188,4 @@ class scoreboard extends uvm_scoreboard;
 
     endfunction
 
-endclass
-
-
-// class scoreboard extends uvm_scoreboard;
-//     `uvm_component_utils(scoreboard)
-
-//     `uvm_analysis_imp_decl(_ahb)
-//     `uvm_analysis_imp_decl(_apb)
-
-//     uvm_analysis_imp_ahb #(ahb_trans, scoreboard) ahb_export;
-//     uvm_analysis_imp_apb #(apb_trans, scoreboard) apb_export;
-
-//     // Queues
-//     ahb_trans ahb_q[$];
-//     apb_trans apb_q[$];
-
-//     int pass_cnt = 0;
-//     int fail_cnt = 0;
-
-//     function new(string name, uvm_component parent);
-//         super.new(name, parent);
-//     endfunction
-
-//     function void build_phase(uvm_phase phase);
-//         super.build_phase(phase);
-//         ahb_export = new("ahb_export", this);
-//         apb_export = new("apb_export", this);
-//     endfunction
-
-//     //========================
-//     function void write_ahb(ahb_trans tr);
-//         ahb_q.push_back(tr);
-//         compare();
-//     endfunction
-
-//     function void write_apb(apb_trans tr);
-//         apb_q.push_back(tr);
-//         compare();
-//     endfunction
-
-//     //========================
-//     function void compare();
-
-//         // Try match until hết khả năng match
-//         foreach (ahb_q[i]) begin
-//             foreach (apb_q[j]) begin
-
-//                 if (match(ahb_q[i], apb_q[j])) begin
-//                     ahb_trans ahb_tr = ahb_q[i];
-//                     apb_trans apb_tr = apb_q[j];
-
-//                     ahb_q.delete(i);
-//                     apb_q.delete(j);
-
-//                     compare_trans(ahb_tr, apb_tr);
-//                     return;
-//                 end
-//             end
-//         end
-
-//     endfunction
-
-//     //========================
-//     function bit match(ahb_trans a, apb_trans b);
-//         return (a.haddr == b.paddr) &&
-//                (a.hwrite == b.pwrite);
-//     endfunction
-
-//     //========================
-//     function void compare_trans(ahb_trans ahb_tr, apb_trans apb_tr);
-
-//         `uvm_info("SB", "Start compare...", UVM_MEDIUM)
-
-//         // WRITE
-//         if (ahb_tr.hwrite) begin
-//             if (ahb_tr.hwdata !== apb_tr.pwdata) begin
-//                 `uvm_error("SB", $sformatf("WDATA mismatch: AHB=%h APB=%h",
-//                             ahb_tr.hwdata, apb_tr.pwdata))
-//                 fail_cnt++;
-//                 return;
-//             end
-//         end
-//         // READ
-//         else begin
-//             if (ahb_tr.hrdata !== apb_tr.prdata) begin
-//                 `uvm_error("SB", $sformatf("RDATA mismatch: AHB=%h APB=%h",
-//                             ahb_tr.hrdata, apb_tr.prdata))
-//                 fail_cnt++;
-//                 return;
-//             end
-//         end
-
-//         // Optional: error check
-//         if (ahb_tr.hresp != 0 || apb_tr.pslverr != 0) begin
-//             `uvm_error("SB", "ERROR response detected")
-//             fail_cnt++;
-//             return;
-//         end
-
-//         pass_cnt++;
-//         `uvm_info("SB", "COMPARE PASS", UVM_LOW)
-
-//     endfunction
-
-//     //========================
-//     function void report_phase(uvm_phase phase);
-//         `uvm_info("SB_REPORT",
-//             $sformatf("RESULT: PASS=%0d FAIL=%0d", pass_cnt, fail_cnt),
-//             UVM_LOW)
-//     endfunction
-
-// endclass
+endclass : scoreboard

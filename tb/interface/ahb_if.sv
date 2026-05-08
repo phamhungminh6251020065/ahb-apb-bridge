@@ -71,6 +71,11 @@ interface ahb_if (input logic HCLK);
         repeat (3) @(posedge HCLK);
     endtask
 
+    initial begin
+        reset_signals();
+        HRESETn = 1;
+    end
+
     // ── Wait ready ───────────────────────────
     task wait_ready();
         @(driver_cb);

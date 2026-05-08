@@ -18,7 +18,9 @@
 //       - apb_slave_regfile
 //==============================================================================
 
-module dut_top (
+module dut_top #(
+    parameter ARBITER_MODE = 0  // 0: Fixed Priority, 1: Round Robin
+)(
     // ── Global signals ──────────────────────────────────────────────────────
     input  wire        HCLK,
     input  wire        HRESETn,
@@ -85,7 +87,7 @@ module dut_top (
     assign HREADYin = HREADYout;
 
     // ── AHB Interconnect ─────────────────────────────────────────────────────
-    ahb_interconnect interconnect_inst (
+    ahb_interconnect #(.MODE(ARBITER_MODE)) interconnect_inst (
         .HCLK     (HCLK),
         .HRESETn  (HRESETn),
         // Response từ Bridge (broadcast về cả 2 Master)

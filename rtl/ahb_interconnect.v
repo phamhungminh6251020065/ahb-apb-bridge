@@ -31,7 +31,9 @@
 //        - Việc decode địa chỉ được thực hiện trong Bridge
 //==============================================================================
 
-module ahb_interconnect (
+module ahb_interconnect #(
+    parameter MODE = 0  // 0: Fixed Priority, 1: Round Robin
+)(
     // Global AHB signals
     input wire HCLK,           // clock của AHB
     input wire HRESETn,        // reset (active low)
@@ -81,7 +83,7 @@ module ahb_interconnect (
 );
     // Instance của AHB arbiter
     ahb_arbiter #(
-        .MODE(1) // 0: Fixed Priority, 1: Round Robin
+        .MODE(MODE) // 0: Fixed Priority, 1: Round Robin
     ) arbiter_inst (
         .HCLK(HCLK),
         .HRESETn(HRESETn),

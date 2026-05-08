@@ -68,9 +68,9 @@ class apb_trans extends uvm_sequence_item;
 
     function string get_slave_name();
         case (slave_id)
-            1: return "GPIO";
-            2: return "Timer";
-            3: return "RegFile";
+            1: return "Slave 1";
+            2: return "Slave 2";
+            3: return "Slave 3";
             default: return "NONE";
         endcase
     endfunction

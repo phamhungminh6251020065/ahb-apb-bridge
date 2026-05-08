@@ -11,7 +11,8 @@ class base_test extends uvm_test;
     env m_env;
 
     // ── Virtual interfaces ────────────────────────────────
-    virtual ahb_if ahb_vif;
+    virtual ahb_if ahb_vif_m1;
+    virtual ahb_if ahb_vif_m2;
     virtual apb_if apb_vif;
 
     function new(string name = "base_test", uvm_component parent);
@@ -23,18 +24,28 @@ class base_test extends uvm_test;
         super.build_phase(phase);
 
         // ── Get VIF từ tb_top ───────────────────────────────
-        if (!uvm_config_db#(virtual ahb_if)::get(this, "", "ahb_vif", ahb_vif))
-            `uvm_fatal("TEST", "Cannot get ahb_vif")
+        if (!uvm_config_db#(virtual ahb_if)::get(this, "", "ahb_vif_m1", ahb_vif_m1))
+            `uvm_fatal("TEST", "Cannot get ahb_vif_m1")
+
+        if (!uvm_config_db#(virtual ahb_if)::get(this, "", "ahb_vif_m2", ahb_vif_m2))
+            `uvm_fatal("TEST", "Cannot get ahb_vif_m2")
 
         if (!uvm_config_db#(virtual apb_if)::get(this, "", "apb_vif", apb_vif))
             `uvm_fatal("TEST", "Cannot get apb_vif")
 
         // ── Config AHB Master 1 ────────────────────────────
-        uvm_config_db#(virtual ahb_if)::set(this, "m_env.ahb_ag", "ahb_vif_m1", ahb_vif);
-        uvm_config_db#(int)::set(this, "m_env.ahb_ag", "master_id", 0);
-        uvm_config_db#(uvm_active_passive_enum)::set(this, "m_env.ahb_ag", "is_active", UVM_ACTIVE);
+        uvm_config_db#(virtual ahb_if)::set(this, "m_env.ahb_ag_m1", "ahb_vif_m1", ahb_vif_m1);
+        uvm_config_db#(int)::set(this, "m_env.ahb_ag_m1", "master_id", 0);
+        uvm_config_db#(uvm_active_passive_enum)::set(this, "m_env.ahb_ag_m1", "is_active", UVM_ACTIVE);
 
-        uvm_config_db#(virtual ahb_if)::set(this,"m_env.ahb_ag.sequencer", "vif", ahb_vif);
+        uvm_config_db#(virtual ahb_if)::set(this,"m_env.ahb_ag_m1.sequencer", "vif", ahb_vif_m1);
+
+        // ── Config AHB Master 2 ────────────────────────
+        uvm_config_db#(virtual ahb_if)::set(this, "m_env.ahb_ag_m2", "ahb_vif_m2", ahb_vif_m2);
+        uvm_config_db#(int)::set(this, "m_env.ahb_ag_m2", "master_id", 1);
+        uvm_config_db#(uvm_active_passive_enum)::set(this, "m_env.ahb_ag_m2", "is_active", UVM_PASSIVE);
+
+        uvm_config_db#(virtual ahb_if)::set(this,"m_env.ahb_ag_m2.sequencer", "vif", ahb_vif_m2);
 
         // ── Config APB (passive) ───────────────────────────
         uvm_config_db#(virtual apb_if)::set(this, "m_env.apb_ag", "apb_vif", apb_vif);
