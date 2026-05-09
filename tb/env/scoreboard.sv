@@ -61,22 +61,48 @@ class scoreboard extends uvm_scoreboard;
         string result_str;
         string master_str;
         string slave_str;
-        bit pass;
 
         logic [31:0] ahb_data;
         logic [31:0] apb_data;
+
         time t;
+
+        bit pass;
+        int match_idx;
+        bit found;
 
         $cast(apb_tr, tr.clone());
 
-        if (ahb_q.size() == 0) begin
-            `uvm_error("SB_EMPTY",
-                $sformatf("APB without AHB! addr=%h", tr.paddr))
+        found = 0;
+        match_idx = -1;
+
+        //====================================================
+        // FIND MATCHING AHB TRANS
+        foreach (ahb_q[i]) begin
+
+            if (ahb_q[i].haddr  == apb_tr.paddr &&
+                ahb_q[i].hwrite == apb_tr.pwrite) begin
+
+                match_idx = i;
+                found = 1;
+                break;
+            end
+        end
+
+        //====================================================
+        // NO MATCH
+        if (!found) begin
+            `uvm_warning("SB_DROP",
+                $sformatf("No matching AHB trans for APB addr=%h",
+                apb_tr.paddr))
             dropped++;
             return;
         end
 
-        ahb_tr = ahb_q.pop_front();
+        //====================================================
+        // GET MATCHED TRANS
+        ahb_tr = ahb_q[match_idx];
+        ahb_q.delete(match_idx);
 
         type_str = ahb_tr.hwrite ? "WRITE" : "READ";
 
@@ -87,20 +113,27 @@ class scoreboard extends uvm_scoreboard;
 
         pass = 1;
 
+        //====================================================
         // DATA CHECK
         if (ahb_data !== apb_data) begin
             pass = 0;
+
             `uvm_error("SB_DATA",
                 $sformatf("%s FAIL addr=%h AHB=%h APB=%h",
-                type_str, ahb_tr.haddr, ahb_data, apb_data))
+                type_str,
+                ahb_tr.haddr,
+                ahb_data,
+                apb_data))
         end
 
+        //====================================================
         // RESP CHECK
         if (ahb_tr.hresp != 0 || apb_tr.pslverr != 0) begin
             pass = 0;
             `uvm_error("SB_RESP", "Error response detected")
         end
 
+        //====================================================
         // COUNT
         if (pass) begin
             matched++;
@@ -111,20 +144,23 @@ class scoreboard extends uvm_scoreboard;
             result_str = "FAIL";
         end
 
-        // SAVE LOG LINE (TABLE ROW)
+        //====================================================
+        // TABLE LOG
         master_str = $sformatf("Master%0d", ahb_tr.master_id + 1);
         slave_str  = apb_tr.get_slave_name();
 
-        line = $sformatf("| %8t | %-4s | %-6s  | %-4s | %08h | %-5s | %08h | %08h | %-5s  |",
-                t,
-                master_str,
-                slave_str,
-                "AHB",
-                ahb_tr.haddr,
-                type_str,
-                ahb_data,
-                apb_data,
-                result_str);
+        line = $sformatf(
+            "| %8t | %-7s | %-8s | %-4s | %08h | %-5s | %08h | %08h | %-5s  |",
+            t,
+            master_str,
+            slave_str,
+            "AHB",
+            ahb_tr.haddr,
+            type_str,
+            ahb_data,
+            apb_data,
+            result_str
+        );
 
         summary_q.push_back(line);
 
