@@ -1,0 +1,6 @@
+base_test
+tc_smoke_test
+tc_reset_all_regs
+tc_reset_mid_transfer
+tc_apb_pslverr
+tc_smoke_test_both

@@ -22,16 +22,26 @@ class smoke_seq extends ahb_base_seq;
 
         `uvm_info("SMOKE_SEQ", "=== Smoke Sequence START ===", UVM_LOW)
 
-        // ── 1. RegFile: ghi 4 register, đọc lại ─────────────────────────────
+        // ── 1. RegFile: ghi 8 register, đọc lại ─────────────────────────────
         `uvm_info("SMOKE_SEQ", "-- RegFile write/read --", UVM_LOW)
         do_write(32'h4002_0000, 32'hDEAD_BEEF);
         do_write(32'h4002_0004, 32'hCAFE_BABE);
         do_write(32'h4002_0008, 32'h1234_5678);
         do_write(32'h4002_000C, 32'h8765_4321);
+        do_write(32'h4002_0010, 32'h1112_1314);
+        do_write(32'h4002_0014, 32'hABCD_EF01);
+        do_write(32'h4002_0018, 32'h5678_1234);
+        do_write(32'h4002_001C, 32'h9ABC_DEF0);
+
+        do_read (32'h4002_0000, rdata);
         do_read (32'h4002_0000, rdata);
         do_read (32'h4002_0004, rdata);
         do_read (32'h4002_0008, rdata);
         do_read (32'h4002_000C, rdata);
+        do_read (32'h4002_0010, rdata);
+        do_read (32'h4002_0014, rdata);
+        do_read (32'h4002_0018, rdata);
+        do_read (32'h4002_001C, rdata);
 
         // ── 2. GPIO: set DIR=output, ghi DATA, đọc lại ───────────────────────
         `uvm_info("SMOKE_SEQ", "-- GPIO write/read --", UVM_LOW)

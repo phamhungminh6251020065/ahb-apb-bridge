@@ -14,4 +14,5 @@ package test_pkg;
     `include "tc_smoke_test_both.sv"
     `include "tc_reset_all_regs.sv"
     `include "tc_reset_mid_transfer.sv"
+    `include "tc_apb_pslverr.sv"
 endpackage : test_pkg

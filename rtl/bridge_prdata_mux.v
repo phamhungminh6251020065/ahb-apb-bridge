@@ -53,7 +53,7 @@ module bridge_prdata_mux (
             HRESP = PSLVERR3 ? 2'b01 : 2'b00; // Lỗi nếu PSLVERR3 = 1
         end else begin
             HRDATA = 32'b0;
-            HRESP = 2'b00;
+            HRESP = 2'b01; // Lỗi nếu không có slave nào được chọn nhưng vẫn có tín hiệu đọc (PSEL=0 nhưng có giao dịch đọc) - Đây là lỗi thiết kế, nên trả về ERROR
         end
     end
 endmodule : bridge_prdata_mux

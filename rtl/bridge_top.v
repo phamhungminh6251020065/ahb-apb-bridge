@@ -99,7 +99,7 @@ module bridge_top (
     // Instance các khối chức năng
     // Address Decoder
     bridge_addr_decoder addr_decoder (
-        .HADDR(HADDR_reg), // Sử dụng địa chỉ đã được lưu trong thanh ghi để giải mã
+        .HADDR(HADDR), // Sử dụng địa chỉ hiện tại để giải mã
         .PSEL1(PSEL1),
         .PSEL2(PSEL2),
         .PSEL3(PSEL3)

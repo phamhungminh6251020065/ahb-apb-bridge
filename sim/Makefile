@@ -45,7 +45,7 @@ SIM_OPTIONS += +UVM_TESTNAME=$(TEST)
 
 #===============================COMMANDS===============================
 
-.PHONY: all comp sim wave clean
+.PHONY: all comp sim wave clean regression cov rewave
 
 wave:
 	mkdir -p $(WAVE_DIR)
@@ -81,8 +81,14 @@ rewave:
 	vsim -view $(WAVE_DIR)/$(TEST).wlf -do wave_$(TEST).do
 
 
+regression:
+	python regression/run_regression.py
+
+
 comp:
 	mkdir -p $(COMP_DIR)
+	vlib $(WORK)
+	vmap $(WORK) $(WORK)
 	vlog -sv +acc -cover bcesf +incdir+$(UVM_HOME)/src $(UVM_HOME)/src/uvm_pkg.sv -l $(COMP_DIR)/$(TEST)_compile.log -f $(COMP)
 
 sim:

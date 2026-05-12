@@ -1,0 +1,34 @@
+============================================================
+             AHB to APB REGRESSION SUMMARY REPORT           
+============================================================
+
+Total testcase run : 6
+Passed             : 5
+Failed             : 1
+Unknown            : 0
+Used time          : 0m 17s
+------------------------------------------------------------
+
+Run summary:
+
++-------------------------------------+----------+---------------------+
+| TESTCASE                            | RESULT   | RUN DATE            |
++-------------------------------------+----------+---------------------+
+| base_test                           | PASS     | 13-05-2026 00:50:08 |
+| tc_smoke_test                       | PASS     | 13-05-2026 00:50:11 |
+| tc_reset_all_regs                   | PASS     | 13-05-2026 00:50:14 |
+| tc_reset_mid_transfer               | PASS     | 13-05-2026 00:50:17 |
+| tc_apb_pslverr                      | FAIL     | 13-05-2026 00:50:20 |
+| tc_smoke_test_both                  | PASS     | 13-05-2026 00:50:23 |
++-------------------------------------+----------+---------------------+
+
+Run log detail:
+log/sim/base_test_simulate.log                     => Passed
+log/sim/tc_smoke_test_simulate.log                 => Passed
+log/sim/tc_reset_all_regs_simulate.log             => Passed
+log/sim/tc_reset_mid_transfer_simulate.log         => Passed
+log/sim/tc_apb_pslverr_simulate.log                => Failed
+log/sim/tc_smoke_test_both_simulate.log            => Passed
+
+########## REGRESSION FAILED ##########
+============================================================

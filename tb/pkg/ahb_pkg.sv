@@ -12,4 +12,5 @@ package ahb_pkg;
     `include "smoke_seq.sv"
     `include "reset_all_regs_seq.sv"
     `include "reset_mid_transfer_seq.sv"
+    `include "apb_pslverr_seq.sv"
 endpackage : ahb_pkg

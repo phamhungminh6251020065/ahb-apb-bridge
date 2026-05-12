@@ -41,23 +41,14 @@ class apb_monitor extends uvm_monitor;
 
     task collect_transaction();
         apb_trans tr;
-        logic pready_active;
 
         // Wait ACCESS phase
         do begin
             @(vif.monitor_cb);
         end while (!(vif.monitor_cb.PENABLE &&
                     (vif.monitor_cb.PSEL1 ||
-                     vif.monitor_cb.PSEL2 ||
-                     vif.monitor_cb.PSEL3)));
-
-        // Wait until PREADY=1 (sample đúng cycle)
-        do begin
-            @(vif.monitor_cb);
-            pready_active = vif.monitor_cb.PSEL1 ? vif.monitor_cb.PREADY1 :
-                            vif.monitor_cb.PSEL2 ? vif.monitor_cb.PREADY2 :
-                                                   vif.monitor_cb.PREADY3;
-        end while (!pready_active);
+                    vif.monitor_cb.PSEL2 ||
+                    vif.monitor_cb.PSEL3)));
 
         // Create transaction
         tr = apb_trans::type_id::create("tr", this);
@@ -70,21 +61,20 @@ class apb_monitor extends uvm_monitor;
         tr.psel2   = vif.monitor_cb.PSEL2;
         tr.psel3   = vif.monitor_cb.PSEL3;
 
-        // Select correct slave response
         if (vif.monitor_cb.PSEL1) begin
             tr.prdata   = vif.monitor_cb.PRDATA1;
             tr.pready   = vif.monitor_cb.PREADY1;
             tr.pslverr  = vif.monitor_cb.PSLVERR1;
-        end else if (vif.monitor_cb.PSEL2) begin
+        end
+        else if (vif.monitor_cb.PSEL2) begin
             tr.prdata   = vif.monitor_cb.PRDATA2;
             tr.pready   = vif.monitor_cb.PREADY2;
             tr.pslverr  = vif.monitor_cb.PSLVERR2;
-        end else if (vif.monitor_cb.PSEL3) begin
+        end
+        else if (vif.monitor_cb.PSEL3) begin
             tr.prdata   = vif.monitor_cb.PRDATA3;
             tr.pready   = vif.monitor_cb.PREADY3;
             tr.pslverr  = vif.monitor_cb.PSLVERR3;
-        end else begin
-            `uvm_warning("APB_MON", "No slave selected!")
         end
 
         tr.decode_slave();
