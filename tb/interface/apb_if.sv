@@ -31,7 +31,8 @@ interface apb_if (input logic PCLK, input logic PRESETn);
     logic        PSLVERR1, PSLVERR2, PSLVERR3;
 
     // Peripheral outputs
-    logic [31:0] GPIO_OUT;
+    logic [7:0]  GPIO_OUT;
+    logic [7:0]  GPIO_IN;   // GPIO input simulation (connected from testbench)
     logic        TIMER_IRQ;
 
     // ── Combined view (for monitor) ─────────

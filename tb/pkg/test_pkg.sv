@@ -15,4 +15,7 @@ package test_pkg;
     `include "tc_reset_all_regs.sv"
     `include "tc_reset_mid_transfer.sv"
     `include "tc_apb_pslverr.sv"
+    `include "tc_apb_gpio_write_all.sv"
+    `include "tc_apb_gpio_read_output.sv"
+    `include "tc_apb_gpio_read_input.sv"
 endpackage : test_pkg

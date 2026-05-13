@@ -44,7 +44,7 @@ module tb_top #(
     end
 
     // ── GPIO + Timer signals (for observation) ───────────────────────────────
-    logic [7:0] GPIO_IN  = 8'b0;
+    logic [7:0] GPIO_IN;
     wire  [7:0] GPIO_OUT;
     wire        TIMER_IRQ;
 
@@ -112,7 +112,8 @@ module tb_top #(
     assign apb_vif.PSLVERR3 = dut.PSLVERR3;
     
     // Peripheral signals
-    assign apb_vif.GPIO_OUT = GPIO_OUT;
+    assign apb_vif.GPIO_OUT = GPIO_OUT; // Connect GPIO_OUT từ DUT ra APB interface để UVM monitor có thể quan sát
+    assign GPIO_IN = apb_vif.GPIO_IN;   // Connect GPIO_IN từ APB interface vào testbench để UVM driver có thể điều khiển
     assign apb_vif.TIMER_IRQ = TIMER_IRQ;
 
     // ── Config DB setup ─────────────────────────────────────────────────────

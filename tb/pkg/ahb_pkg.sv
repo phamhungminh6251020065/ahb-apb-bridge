@@ -13,4 +13,7 @@ package ahb_pkg;
     `include "reset_all_regs_seq.sv"
     `include "reset_mid_transfer_seq.sv"
     `include "apb_pslverr_seq.sv"
+    `include "apb_gpio_write_all_seq.sv"
+    `include "apb_gpio_read_output_seq.sv"
+    `include "apb_gpio_read_input_seq.sv"
 endpackage : ahb_pkg
