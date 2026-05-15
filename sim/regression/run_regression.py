@@ -82,7 +82,7 @@ seconds = used_time.seconds % 60
 report = ""
 
 report += "============================================================\n"
-report += "             AHB to APB REGRESSION SUMMARY REPORT           \n"
+report += "            AHB to APB REGRESSION SUMMARY REPORT           \n"
 report += "============================================================\n\n"
 
 report += f"Total testcase run : {len(results)}\n"
@@ -139,7 +139,7 @@ report += "============================================================\n"
 
 os.makedirs("regression", exist_ok=True)
 
-report_path = "regression/report.txt"
+report_path = "regression/report.log"
 
 with open(report_path, "w") as rpt:
     rpt.write(report)

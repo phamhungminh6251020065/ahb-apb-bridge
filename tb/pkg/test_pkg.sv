@@ -22,4 +22,6 @@ package test_pkg;
     `include "tc_apb_timer_irq.sv"
     `include "tc_apb_timer_disable.sv"
     `include "tc_apb_regfile_all.sv"
+    `include "tc_ahb_wait_state.sv"
+    `include "tc_ahb_hresp_okay.sv"
 endpackage : test_pkg

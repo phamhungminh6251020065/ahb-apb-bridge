@@ -20,4 +20,6 @@ package ahb_pkg;
     `include "apb_timer_irq_seq.sv"
     `include "apb_timer_disable_seq.sv"
     `include "apb_regfile_all_seq.sv"
+    `include "ahb_wait_state_seq.sv"
+    `include "ahb_hresp_okay_seq.sv"
 endpackage : ahb_pkg

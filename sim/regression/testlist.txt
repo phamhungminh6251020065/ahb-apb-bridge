@@ -9,3 +9,6 @@ tc_apb_gpio_read_output
 tc_apb_timer_enable
 tc_apb_timer_irq
 tc_apb_timer_disable
+tc_apb_regfile_all
+tc_ahb_wait_state
+tc_ahb_hresp_okay
