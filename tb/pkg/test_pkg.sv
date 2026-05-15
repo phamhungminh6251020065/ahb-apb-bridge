@@ -18,4 +18,8 @@ package test_pkg;
     `include "tc_apb_gpio_write_all.sv"
     `include "tc_apb_gpio_read_output.sv"
     `include "tc_apb_gpio_read_input.sv"
+    `include "tc_apb_timer_enable.sv"
+    `include "tc_apb_timer_irq.sv"
+    `include "tc_apb_timer_disable.sv"
+    `include "tc_apb_regfile_all.sv"
 endpackage : test_pkg

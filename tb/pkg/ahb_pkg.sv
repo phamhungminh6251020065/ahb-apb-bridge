@@ -16,4 +16,8 @@ package ahb_pkg;
     `include "apb_gpio_write_all_seq.sv"
     `include "apb_gpio_read_output_seq.sv"
     `include "apb_gpio_read_input_seq.sv"
+    `include "apb_timer_enable_seq.sv"
+    `include "apb_timer_irq_seq.sv"
+    `include "apb_timer_disable_seq.sv"
+    `include "apb_regfile_all_seq.sv"
 endpackage : ahb_pkg
