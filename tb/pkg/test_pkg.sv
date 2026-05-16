@@ -24,4 +24,6 @@ package test_pkg;
     `include "tc_apb_regfile_all.sv"
     `include "tc_ahb_wait_state.sv"
     `include "tc_ahb_hresp_okay.sv"
+    `include "tc_ahb_invalid_addr.sv"
+    `include "tc_ahb_busreq_grant.sv"
 endpackage : test_pkg

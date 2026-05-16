@@ -22,4 +22,6 @@ package ahb_pkg;
     `include "apb_regfile_all_seq.sv"
     `include "ahb_wait_state_seq.sv"
     `include "ahb_hresp_okay_seq.sv"
+    `include "ahb_invalid_addr_seq.sv"
+    `include "ahb_busreq_grant_seq.sv"
 endpackage : ahb_pkg

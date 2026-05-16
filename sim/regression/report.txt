@@ -2,11 +2,11 @@
              AHB to APB REGRESSION SUMMARY REPORT           
 ============================================================
 
-Total testcase run : 14
-Passed             : 13
-Failed             : 1
+Total testcase run : 16
+Passed             : 14
+Failed             : 2
 Unknown            : 0
-Used time          : 0m 42s
+Used time          : 0m 45s
 ------------------------------------------------------------
 
 Run summary:
@@ -14,20 +14,22 @@ Run summary:
 +-------------------------------------+----------+---------------------+
 | TESTCASE                            | RESULT   | RUN DATE            |
 +-------------------------------------+----------+---------------------+
-| base_test                           | PASS     | 16-05-2026 02:08:11 |
-| tc_smoke_test                       | PASS     | 16-05-2026 02:08:14 |
-| tc_reset_all_regs                   | PASS     | 16-05-2026 02:08:17 |
-| tc_reset_mid_transfer               | PASS     | 16-05-2026 02:08:20 |
-| tc_apb_pslverr                      | FAIL     | 16-05-2026 02:08:23 |
-| tc_smoke_test_both                  | PASS     | 16-05-2026 02:08:26 |
-| tc_apb_gpio_write_all               | PASS     | 16-05-2026 02:08:29 |
-| tc_apb_gpio_read_output             | PASS     | 16-05-2026 02:08:32 |
-| tc_apb_timer_enable                 | PASS     | 16-05-2026 02:08:35 |
-| tc_apb_timer_irq                    | PASS     | 16-05-2026 02:08:38 |
-| tc_apb_timer_disable                | PASS     | 16-05-2026 02:08:41 |
-| tc_apb_regfile_all                  | PASS     | 16-05-2026 02:08:44 |
-| tc_ahb_wait_state                   | PASS     | 16-05-2026 02:08:47 |
-| tc_ahb_hresp_okay                   | PASS     | 16-05-2026 02:08:50 |
+| base_test                           | PASS     | 17-05-2026 00:01:59 |
+| tc_smoke_test                       | PASS     | 17-05-2026 00:02:02 |
+| tc_reset_all_regs                   | PASS     | 17-05-2026 00:02:04 |
+| tc_reset_mid_transfer               | PASS     | 17-05-2026 00:02:07 |
+| tc_apb_pslverr                      | FAIL     | 17-05-2026 00:02:10 |
+| tc_smoke_test_both                  | PASS     | 17-05-2026 00:02:13 |
+| tc_apb_gpio_write_all               | PASS     | 17-05-2026 00:02:15 |
+| tc_apb_gpio_read_output             | PASS     | 17-05-2026 00:02:18 |
+| tc_apb_timer_enable                 | PASS     | 17-05-2026 00:02:21 |
+| tc_apb_timer_irq                    | PASS     | 17-05-2026 00:02:24 |
+| tc_apb_timer_disable                | PASS     | 17-05-2026 00:02:27 |
+| tc_apb_regfile_all                  | PASS     | 17-05-2026 00:02:30 |
+| tc_ahb_wait_state                   | PASS     | 17-05-2026 00:02:33 |
+| tc_ahb_hresp_okay                   | PASS     | 17-05-2026 00:02:35 |
+| tc_ahb_invalid_addr                 | FAIL     | 17-05-2026 00:02:38 |
+| tc_ahb_busreq_grant                 | PASS     | 17-05-2026 00:02:41 |
 +-------------------------------------+----------+---------------------+
 
 Run log detail:
@@ -45,6 +47,8 @@ log/sim/tc_apb_timer_disable_simulate.log          => Passed
 log/sim/tc_apb_regfile_all_simulate.log            => Passed
 log/sim/tc_ahb_wait_state_simulate.log             => Passed
 log/sim/tc_ahb_hresp_okay_simulate.log             => Passed
+log/sim/tc_ahb_invalid_addr_simulate.log           => Failed
+log/sim/tc_ahb_busreq_grant_simulate.log           => Passed
 
 ########## REGRESSION FAILED ##########
 ============================================================

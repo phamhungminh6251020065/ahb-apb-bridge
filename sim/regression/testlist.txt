@@ -12,3 +12,5 @@ tc_apb_timer_disable
 tc_apb_regfile_all
 tc_ahb_wait_state
 tc_ahb_hresp_okay
+tc_ahb_invalid_addr
+tc_ahb_busreq_grant
