@@ -80,8 +80,8 @@ module apb_slave_gpio (
     // Read logic
     always @(*) begin
         PRDATA = 32'b0; // Default
-        // if (PSEL && PENABLE && !PWRITE && addr_valid) begin
-        if (!PWRITE && addr_valid) begin
+        if (PSEL && PENABLE && !PWRITE && addr_valid) begin
+        //if (!PWRITE && addr_valid) begin
             case(PADDR[3:2])
                 2'b00: PRDATA = {24'b0, gpio_read};
                 2'b01: PRDATA = {24'b0, dir_reg};

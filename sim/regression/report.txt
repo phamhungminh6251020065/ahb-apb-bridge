@@ -2,11 +2,11 @@
              AHB to APB REGRESSION SUMMARY REPORT           
 ============================================================
 
-Total testcase run : 16
-Passed             : 14
+Total testcase run : 18
+Passed             : 16
 Failed             : 2
 Unknown            : 0
-Used time          : 0m 45s
+Used time          : 0m 52s
 ------------------------------------------------------------
 
 Run summary:
@@ -14,22 +14,24 @@ Run summary:
 +-------------------------------------+----------+---------------------+
 | TESTCASE                            | RESULT   | RUN DATE            |
 +-------------------------------------+----------+---------------------+
-| base_test                           | PASS     | 17-05-2026 00:01:59 |
-| tc_smoke_test                       | PASS     | 17-05-2026 00:02:02 |
-| tc_reset_all_regs                   | PASS     | 17-05-2026 00:02:04 |
-| tc_reset_mid_transfer               | PASS     | 17-05-2026 00:02:07 |
-| tc_apb_pslverr                      | FAIL     | 17-05-2026 00:02:10 |
-| tc_smoke_test_both                  | PASS     | 17-05-2026 00:02:13 |
-| tc_apb_gpio_write_all               | PASS     | 17-05-2026 00:02:15 |
-| tc_apb_gpio_read_output             | PASS     | 17-05-2026 00:02:18 |
-| tc_apb_timer_enable                 | PASS     | 17-05-2026 00:02:21 |
-| tc_apb_timer_irq                    | PASS     | 17-05-2026 00:02:24 |
-| tc_apb_timer_disable                | PASS     | 17-05-2026 00:02:27 |
-| tc_apb_regfile_all                  | PASS     | 17-05-2026 00:02:30 |
-| tc_ahb_wait_state                   | PASS     | 17-05-2026 00:02:33 |
-| tc_ahb_hresp_okay                   | PASS     | 17-05-2026 00:02:35 |
-| tc_ahb_invalid_addr                 | FAIL     | 17-05-2026 00:02:38 |
-| tc_ahb_busreq_grant                 | PASS     | 17-05-2026 00:02:41 |
+| base_test                           | PASS     | 18-05-2026 01:57:36 |
+| tc_smoke_test                       | PASS     | 18-05-2026 01:57:39 |
+| tc_reset_all_regs                   | PASS     | 18-05-2026 01:57:42 |
+| tc_reset_mid_transfer               | PASS     | 18-05-2026 01:57:45 |
+| tc_apb_pslverr                      | FAIL     | 18-05-2026 01:57:48 |
+| tc_smoke_test_both                  | PASS     | 18-05-2026 01:57:51 |
+| tc_apb_gpio_write_all               | PASS     | 18-05-2026 01:57:54 |
+| tc_apb_gpio_read_output             | PASS     | 18-05-2026 01:57:57 |
+| tc_apb_timer_enable                 | PASS     | 18-05-2026 01:57:59 |
+| tc_apb_timer_irq                    | PASS     | 18-05-2026 01:58:02 |
+| tc_apb_timer_disable                | PASS     | 18-05-2026 01:58:05 |
+| tc_apb_regfile_all                  | PASS     | 18-05-2026 01:58:08 |
+| tc_ahb_wait_state                   | PASS     | 18-05-2026 01:58:11 |
+| tc_ahb_hresp_okay                   | PASS     | 18-05-2026 01:58:14 |
+| tc_ahb_invalid_addr                 | FAIL     | 18-05-2026 01:58:17 |
+| tc_ahb_busreq_grant                 | PASS     | 18-05-2026 01:58:20 |
+| tc_bridge_single_write_read         | PASS     | 18-05-2026 01:58:23 |
+| tc_bridge_addr_decode               | PASS     | 18-05-2026 01:58:26 |
 +-------------------------------------+----------+---------------------+
 
 Run log detail:
@@ -49,6 +51,8 @@ log/sim/tc_ahb_wait_state_simulate.log             => Passed
 log/sim/tc_ahb_hresp_okay_simulate.log             => Passed
 log/sim/tc_ahb_invalid_addr_simulate.log           => Failed
 log/sim/tc_ahb_busreq_grant_simulate.log           => Passed
+log/sim/tc_bridge_single_write_read_simulate.log   => Passed
+log/sim/tc_bridge_addr_decode_simulate.log         => Passed
 
 ########## REGRESSION FAILED ##########
 ============================================================

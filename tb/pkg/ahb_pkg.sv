@@ -24,4 +24,6 @@ package ahb_pkg;
     `include "ahb_hresp_okay_seq.sv"
     `include "ahb_invalid_addr_seq.sv"
     `include "ahb_busreq_grant_seq.sv"
+    `include "bridge_single_write_read_seq.sv"
+    `include "bridge_addr_decode_seq.sv"
 endpackage : ahb_pkg

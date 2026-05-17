@@ -26,4 +26,6 @@ package test_pkg;
     `include "tc_ahb_hresp_okay.sv"
     `include "tc_ahb_invalid_addr.sv"
     `include "tc_ahb_busreq_grant.sv"
+    `include "tc_bridge_single_write_read.sv"
+    `include "tc_bridge_addr_decode.sv"
 endpackage : test_pkg

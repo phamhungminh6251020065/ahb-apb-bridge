@@ -141,8 +141,8 @@ module apb_slave_timer (
     // Read logic
     always @(*) begin
         PRDATA = 32'b0;
-        // if (PSEL && PENABLE && !PWRITE && addr_valid) begin
-        if (!PWRITE && addr_valid) begin
+        if (PSEL && PENABLE && !PWRITE && addr_valid) begin
+        //if (!PWRITE && addr_valid) begin
             case (PADDR[3:2])
                 2'b00: PRDATA = {31'b0, ctrl_reg};
                 2'b01: PRDATA = cnt_reg;

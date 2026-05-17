@@ -59,8 +59,8 @@ module apb_slave_regfile (
     // Drive PRDATA ngay khi PSEL=1, PENABLE=1, PWRITE=0
     always @(*) begin
         PRDATA = 32'b0; // Default
-        // if (PSEL && PENABLE && !PWRITE && addr_valid) begin
-        if (!PWRITE && addr_valid) begin
+        if (PSEL && PENABLE && !PWRITE && addr_valid) begin
+        //if (!PWRITE && addr_valid) begin
             PRDATA = mem[PADDR[4:2]];
         end
     end

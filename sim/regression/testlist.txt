@@ -14,3 +14,5 @@ tc_ahb_wait_state
 tc_ahb_hresp_okay
 tc_ahb_invalid_addr
 tc_ahb_busreq_grant
+tc_bridge_single_write_read
+tc_bridge_addr_decode
