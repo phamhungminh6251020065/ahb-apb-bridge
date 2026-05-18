@@ -26,4 +26,7 @@ package ahb_pkg;
     `include "ahb_busreq_grant_seq.sv"
     `include "bridge_single_write_read_seq.sv"
     `include "bridge_addr_decode_seq.sv"
+    `include "bridge_b2b_write_read_seq.sv"
+    `include "bridge_unaligned_addr_seq.sv"
+    `include "bridge_cross_slave_seq.sv"
 endpackage : ahb_pkg

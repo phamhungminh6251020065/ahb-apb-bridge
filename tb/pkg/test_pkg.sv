@@ -28,4 +28,7 @@ package test_pkg;
     `include "tc_ahb_busreq_grant.sv"
     `include "tc_bridge_single_write_read.sv"
     `include "tc_bridge_addr_decode.sv"
+    `include "tc_bridge_b2b_write_read.sv"
+    `include "tc_bridge_unaligned_addr.sv"
+    `include "tc_bridge_cross_slave.sv"
 endpackage : test_pkg

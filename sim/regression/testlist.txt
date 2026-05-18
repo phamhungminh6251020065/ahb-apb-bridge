@@ -16,3 +16,6 @@ tc_ahb_invalid_addr
 tc_ahb_busreq_grant
 tc_bridge_single_write_read
 tc_bridge_addr_decode
+tc_bridge_b2b_write_read
+tc_bridge_unaligned_addr
+tc_bridge_cross_slave
