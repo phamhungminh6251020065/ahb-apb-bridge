@@ -31,4 +31,6 @@ package test_pkg;
     `include "tc_bridge_b2b_write_read.sv"
     `include "tc_bridge_unaligned_addr.sv"
     `include "tc_bridge_cross_slave.sv"
+    `include "tc_arb_fixed_m1_wins.sv"
+    `include "tc_arb_round_robin.sv"
 endpackage : test_pkg

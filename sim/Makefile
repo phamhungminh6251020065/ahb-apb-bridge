@@ -40,7 +40,7 @@ SEED ?= random
 
 #===============================SIMULATION OPTIONS===============================
 SIM_OPTIONS += +UVM_VERBOSITY=$(VERBOSITY) 
-SIM_OPTIONS +=-sv_seed $(SEED)
+SIM_OPTIONS += -sv_seed $(SEED)
 SIM_OPTIONS += +UVM_TESTNAME=$(TEST)
 
 #===============================COMMANDS===============================

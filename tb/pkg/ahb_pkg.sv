@@ -29,4 +29,6 @@ package ahb_pkg;
     `include "bridge_b2b_write_read_seq.sv"
     `include "bridge_unaligned_addr_seq.sv"
     `include "bridge_cross_slave_seq.sv"
+    `include "arb_fixed_m1_wins_seq.sv"
+    `include "arb_round_robin_seq.sv"
 endpackage : ahb_pkg
