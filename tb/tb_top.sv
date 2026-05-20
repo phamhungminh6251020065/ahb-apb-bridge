@@ -12,7 +12,7 @@
 `timescale 1ns/1ps
 
 module tb_top #(
-    parameter ARBITER_MODE = 0  // 0: Fixed Priority, 1: Round Robin (can be overridden via plusargs in simulation command)
+    parameter ARBITER_MODE = 0  // 0: Fixed Priority, 1: Round Robin (can be overridden via simulator -G parameter)
 );
 
     import uvm_pkg::*;
@@ -47,6 +47,7 @@ module tb_top #(
     logic [7:0] GPIO_IN;
     wire  [7:0] GPIO_OUT;
     wire        TIMER_IRQ;
+    wire        ARBITER_MODE_OUT;
 
     // ── DUT instantiation ────────────────────────────────────────────────────
     dut_top #(.ARBITER_MODE(ARBITER_MODE)) dut (
@@ -85,7 +86,10 @@ module tb_top #(
         .GPIO_OUT   (GPIO_OUT),
         
         // Timer
-        .TIMER_IRQ  (TIMER_IRQ)
+        .TIMER_IRQ  (TIMER_IRQ),
+
+        // Arbiter mode visibility
+        .ARBITER_MODE_OUT(ARBITER_MODE_OUT)
     );
 
     // ── Connect APB interface ────────────────────────────────────────────────

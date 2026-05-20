@@ -5,8 +5,7 @@
 // Date    : 19/05/2026
 //------------------------------------------------------------------------------
 // Description:
-// Single transfer sequence for Round-Robin arbitration test.
-// Each master issues ONE transfer only.
+// Arbiter MODE=1, cả 2 request liên tục → grant thứ tự M1→M2→M1→M2.
 //==============================================================================
 
 class arb_round_robin_seq extends ahb_base_seq;

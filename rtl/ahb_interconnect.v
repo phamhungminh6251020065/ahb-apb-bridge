@@ -79,7 +79,8 @@ module ahb_interconnect #(
     output wire [2:0] HBURST,   // tín hiệu burst type từ master  (000=single, 001=INCR, 010=WRAP4, 011=INCR4, 100=WRAP8, 101=INCR8, 110=WRAP16, 111=INCR16)
     output wire [31:0] HADDR,   // địa chỉ từ master được grant sau khi mux
     output wire [31:0] HWDATA,  // dữ liệu ghi từ master được grant sau khi mux
-    output wire        HSEL    // tín hiệu chọn slave (dựa trên HTRANS != IDLE)
+    output wire        HSEL,    // tín hiệu chọn slave (dựa trên HTRANS != IDLE)
+    output wire        MODE_OUT // expose mode for waveform/debug
 );
     // Instance của AHB arbiter
     ahb_arbiter #(
@@ -112,4 +113,7 @@ module ahb_interconnect #(
     assign HREADY2 = HREADY;
     assign HRDATA2 = HRDATA;
     assign HRESP2 = HRESP;
+
+    // Expose current arbiter mode for waveform/debug visibility
+    assign MODE_OUT = MODE;
 endmodule : ahb_interconnect

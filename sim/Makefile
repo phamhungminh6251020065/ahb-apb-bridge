@@ -37,11 +37,14 @@ TEST ?= base_test
 VERBOSITY ?= UVM_HIGH
 # Default seed (can be overridden on command line)
 SEED ?= random
+# Default arbiter mode (can be overridden on command line)
+ARBITER_MODE ?= 0
 
 #===============================SIMULATION OPTIONS===============================
 SIM_OPTIONS += +UVM_VERBOSITY=$(VERBOSITY) 
 SIM_OPTIONS += -sv_seed $(SEED)
 SIM_OPTIONS += +UVM_TESTNAME=$(TEST)
+SIM_OPTIONS += -GARBITER_MODE=$(ARBITER_MODE)
 
 #===============================COMMANDS===============================
 

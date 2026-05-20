@@ -56,7 +56,10 @@ module dut_top #(
     output wire [7:0]  GPIO_OUT,
 
     // ── Timer interrupt (observed by TB) ────────────────────────────────────
-    output wire        TIMER_IRQ
+    output wire        TIMER_IRQ,
+
+    // ── Arbiter mode visibility for waveform/debug ───────────────────────────
+    output wire        ARBITER_MODE_OUT
 );
 
     // ── Internal wires: Interconnect → Bridge ────────────────────────────────
@@ -94,6 +97,7 @@ module dut_top #(
         .HREADY   (HREADYout),
         .HRDATA   (HRDATA),
         .HRESP    (HRESP),
+        .MODE_OUT (ARBITER_MODE_OUT),
         // Master 1
         .HBUSREQ1 (HBUSREQ1),
         .HADDR1   (HADDR1),
