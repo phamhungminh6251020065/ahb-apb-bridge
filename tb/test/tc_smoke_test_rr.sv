@@ -22,7 +22,7 @@ class tc_smoke_test_rr extends base_test;
     endfunction
 
     //========================================================
-    function void build_phase(uvm_phase phase);
+    virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
 
         // Không thể set config DB từ test cho DUT parameter
@@ -32,7 +32,7 @@ class tc_smoke_test_rr extends base_test;
     endfunction
 
     //========================================================
-    task run_phase(uvm_phase phase);
+    virtual task run_phase(uvm_phase phase);
         phase.raise_objection(this);
 
         `uvm_info("SMOKE_TEST_RR", "Starting smoke test with Round Robin arbitration", UVM_LOW)

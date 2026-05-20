@@ -2,11 +2,11 @@
              AHB to APB REGRESSION SUMMARY REPORT           
 ============================================================
 
-Total testcase run : 23
-Passed             : 20
+Total testcase run : 24
+Passed             : 21
 Failed             : 3
 Unknown            : 0
-Used time          : 1m 3s
+Used time          : 1m 11s
 ------------------------------------------------------------
 
 Run summary:
@@ -14,29 +14,30 @@ Run summary:
 +-------------------------------------+----------+---------------------+
 | TESTCASE                            | RESULT   | RUN DATE            |
 +-------------------------------------+----------+---------------------+
-| base_test                           | PASS     | 20-05-2026 20:00:13 |
-| tc_smoke_test                       | PASS     | 20-05-2026 20:00:17 |
-| tc_reset_all_regs                   | PASS     | 20-05-2026 20:00:20 |
-| tc_reset_mid_transfer               | PASS     | 20-05-2026 20:00:22 |
-| tc_apb_pslverr                      | FAIL     | 20-05-2026 20:00:25 |
-| tc_smoke_test_both                  | PASS     | 20-05-2026 20:00:28 |
-| tc_apb_gpio_write_all               | PASS     | 20-05-2026 20:00:31 |
-| tc_apb_gpio_read_output             | PASS     | 20-05-2026 20:00:33 |
-| tc_apb_timer_enable                 | PASS     | 20-05-2026 20:00:36 |
-| tc_apb_timer_irq                    | PASS     | 20-05-2026 20:00:39 |
-| tc_apb_timer_disable                | PASS     | 20-05-2026 20:00:42 |
-| tc_apb_regfile_all                  | PASS     | 20-05-2026 20:00:44 |
-| tc_ahb_wait_state                   | PASS     | 20-05-2026 20:00:47 |
-| tc_ahb_hresp_okay                   | PASS     | 20-05-2026 20:00:50 |
-| tc_ahb_invalid_addr                 | FAIL     | 20-05-2026 20:00:52 |
-| tc_ahb_busreq_grant                 | PASS     | 20-05-2026 20:00:55 |
-| tc_bridge_single_write_read         | PASS     | 20-05-2026 20:00:58 |
-| tc_bridge_addr_decode               | PASS     | 20-05-2026 20:01:01 |
-| tc_bridge_b2b_write_read            | PASS     | 20-05-2026 20:01:03 |
-| tc_bridge_unaligned_addr            | FAIL     | 20-05-2026 20:01:06 |
-| tc_bridge_cross_slave               | PASS     | 20-05-2026 20:01:09 |
-| tc_arb_fixed_m1_wins                | PASS     | 20-05-2026 20:01:11 |
-| tc_arb_round_robin                  | PASS     | 20-05-2026 20:01:14 |
+| base_test                           | PASS     | 20-05-2026 23:58:23 |
+| tc_smoke_test                       | PASS     | 20-05-2026 23:58:27 |
+| tc_reset_all_regs                   | PASS     | 20-05-2026 23:58:30 |
+| tc_reset_mid_transfer               | PASS     | 20-05-2026 23:58:33 |
+| tc_apb_pslverr                      | FAIL     | 20-05-2026 23:58:35 |
+| tc_smoke_test_both                  | PASS     | 20-05-2026 23:58:38 |
+| tc_apb_gpio_write_all               | PASS     | 20-05-2026 23:58:41 |
+| tc_apb_gpio_read_output             | PASS     | 20-05-2026 23:58:44 |
+| tc_apb_timer_enable                 | PASS     | 20-05-2026 23:58:47 |
+| tc_apb_timer_irq                    | PASS     | 20-05-2026 23:58:50 |
+| tc_apb_timer_disable                | PASS     | 20-05-2026 23:58:53 |
+| tc_apb_regfile_all                  | PASS     | 20-05-2026 23:58:56 |
+| tc_ahb_wait_state                   | PASS     | 20-05-2026 23:58:59 |
+| tc_ahb_hresp_okay                   | PASS     | 20-05-2026 23:59:02 |
+| tc_ahb_invalid_addr                 | FAIL     | 20-05-2026 23:59:05 |
+| tc_ahb_busreq_grant                 | PASS     | 20-05-2026 23:59:08 |
+| tc_bridge_single_write_read         | PASS     | 20-05-2026 23:59:11 |
+| tc_bridge_addr_decode               | PASS     | 20-05-2026 23:59:13 |
+| tc_bridge_b2b_write_read            | PASS     | 20-05-2026 23:59:16 |
+| tc_bridge_unaligned_addr            | FAIL     | 20-05-2026 23:59:19 |
+| tc_bridge_cross_slave               | PASS     | 20-05-2026 23:59:22 |
+| tc_arb_fixed_m1_wins                | PASS     | 20-05-2026 23:59:25 |
+| tc_arb_round_robin                  | PASS     | 20-05-2026 23:59:28 |
+| tc_func_data_isolation              | PASS     | 20-05-2026 23:59:31 |
 +-------------------------------------+----------+---------------------+
 
 Run log detail:
@@ -63,6 +64,7 @@ log/sim/tc_bridge_unaligned_addr_simulate.log      => Failed
 log/sim/tc_bridge_cross_slave_simulate.log         => Passed
 log/sim/tc_arb_fixed_m1_wins_simulate.log          => Passed
 log/sim/tc_arb_round_robin_simulate.log            => Passed
+log/sim/tc_func_data_isolation_simulate.log        => Passed
 
 ########## REGRESSION FAILED ##########
 ============================================================

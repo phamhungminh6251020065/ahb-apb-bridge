@@ -22,7 +22,7 @@ class tc_smoke_test_m2 extends base_test;
     endfunction
 
     //========================================================
-    function void build_phase(uvm_phase phase);
+    virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         
         // Kích hoạt Master 2 agent, vô hiệu hóa Master 1
@@ -33,7 +33,7 @@ class tc_smoke_test_m2 extends base_test;
     endfunction
 
     //========================================================
-    task run_phase(uvm_phase phase);
+    virtual task run_phase(uvm_phase phase);
         phase.raise_objection(this);
 
         `uvm_info("SMOKE_TEST_M2", "Starting smoke test on Master 2", UVM_LOW)

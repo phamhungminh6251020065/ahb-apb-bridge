@@ -33,4 +33,5 @@ package test_pkg;
     `include "tc_bridge_cross_slave.sv"
     `include "tc_arb_fixed_m1_wins.sv"
     `include "tc_arb_round_robin.sv"
+    `include "tc_func_data_isolation.sv"
 endpackage : test_pkg

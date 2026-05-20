@@ -23,7 +23,7 @@ class tc_smoke_test_both extends base_test;
     endfunction
 
     //========================================================
-    function void build_phase(uvm_phase phase);
+    virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
 
         // Kích hoạt cả hai master
@@ -34,7 +34,7 @@ class tc_smoke_test_both extends base_test;
     endfunction
 
     //========================================================
-    task run_phase(uvm_phase phase);
+    virtual task run_phase(uvm_phase phase);
         phase.raise_objection(this);
 
         `uvm_info("SMOKE_TEST_BOTH", "Starting smoke test with both masters active", UVM_LOW)

@@ -9,7 +9,7 @@ class tc_reset_all_regs extends base_test;
 
     
     //========================================================
-    function void build_phase(uvm_phase phase);
+    virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         
         // Kích hoạt Master 2 agent, vô hiệu hóa Master 1
@@ -17,7 +17,7 @@ class tc_reset_all_regs extends base_test;
         uvm_config_db#(uvm_active_passive_enum)::set(this, "m_env.ahb_ag_m2", "is_active", UVM_ACTIVE);
         
         `uvm_info("SMOKE_TEST_M2", "Master 2 will be active in this test", UVM_LOW)
-    endfunction
+    endfunction : build_phase
 
     virtual task run_phase(uvm_phase phase);
         phase.raise_objection(this);

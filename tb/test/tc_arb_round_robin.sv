@@ -7,7 +7,7 @@ class tc_arb_round_robin extends base_test;
         super.new(name, parent);
     endfunction : new
 
-    function void build_phase(uvm_phase phase);
+    virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
 
         // Kích hoạt cả hai master
@@ -33,7 +33,7 @@ class tc_arb_round_robin extends base_test;
                 //------------------------------------
                 begin
                     m_seq_m1 = arb_round_robin_seq::type_id::create( $sformatf("m_seq_m1_%0t", $time));
-                     m_seq_m1.master_id = 0;
+                    m_seq_m1.master_id = 0;
 
                     if (!m_seq_m1.randomize()) 
                         `uvm_error("ARB_ROUND_ROBIN", "M1 randomize failed")

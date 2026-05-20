@@ -94,6 +94,19 @@ module ahb_interconnect #(
         .HGRANT1(HGRANT1),
         .HGRANT2(HGRANT2)
     );
+
+    // AHB write data is one cycle after address/control, so keep the granted
+    // master from the address phase for the following data phase.
+    reg data_phase_grant_m1;
+
+    always @(posedge HCLK or negedge HRESETn) begin
+        if (!HRESETn) begin
+            data_phase_grant_m1 <= 1'b1;
+        end else if (HREADY && (HGRANT1 || HGRANT2) &&
+                     ((HGRANT1 && HTRANS1[1]) || (HGRANT2 && HTRANS2[1]))) begin
+            data_phase_grant_m1 <= HGRANT1;
+        end
+    end
     // Các mux để chọn tín hiệu từ master được grant
     // Address & Control Mux
     assign HADDR = HGRANT1 ? HADDR1 : HADDR2;
@@ -102,7 +115,7 @@ module ahb_interconnect #(
     assign HSIZE = HGRANT1 ? HSIZE1 : HSIZE2;
     assign HBURST = HGRANT1 ? HBURST1 : HBURST2;
     // Write Data Mux
-    assign HWDATA = HGRANT1 ? HWDATA1 : HWDATA2;
+    assign HWDATA = data_phase_grant_m1 ? HWDATA1 : HWDATA2;
     // Nhìn vào bit 1 của HTRANS để tạo tín hiệu HSEL (chọn slave)
     assign HSEL = HTRANS[1];
     // assign HSEL = 1'b1;

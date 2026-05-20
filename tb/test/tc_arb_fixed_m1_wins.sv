@@ -7,7 +7,7 @@ class tc_arb_fixed_m1_wins extends base_test;
         super.new(name, parent);
     endfunction : new
 
-    function void build_phase(uvm_phase phase);
+    virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
 
         // Kích hoạt cả hai master

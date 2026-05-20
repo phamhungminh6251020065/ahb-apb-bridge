@@ -31,4 +31,5 @@ package ahb_pkg;
     `include "bridge_cross_slave_seq.sv"
     `include "arb_fixed_m1_wins_seq.sv"
     `include "arb_round_robin_seq.sv"
+    `include "func_data_isolation_seq.sv"
 endpackage : ahb_pkg

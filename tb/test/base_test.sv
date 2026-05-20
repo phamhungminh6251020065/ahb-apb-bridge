@@ -15,12 +15,12 @@ class base_test extends uvm_test;
     virtual ahb_if ahb_vif_m2;
     virtual apb_if apb_vif;
 
-    function new(string name = "base_test", uvm_component parent);
+    function new(string name = "base_test", uvm_component parent = null);
         super.new(name, parent);
     endfunction
 
     //========================================================
-    function void build_phase(uvm_phase phase);
+    virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
 
         // ── Get VIF từ tb_top ───────────────────────────────
@@ -55,26 +55,26 @@ class base_test extends uvm_test;
         m_env = env::type_id::create("m_env", this);
 
         `uvm_info("TEST", "Build phase complete", UVM_LOW)
-    endfunction
+    endfunction : build_phase
 
     //========================================================
-    task run_phase(uvm_phase phase);
+    virtual task run_phase(uvm_phase phase);
         phase.raise_objection(this);
 
         `uvm_info("TEST", "Run phase started", UVM_LOW)
 
         // Chưa chạy sequence (smoke env)
-        #1000;
+        #100ns;
 
         phase.drop_objection(this);
-    endtask
+    endtask : run_phase
 
     //========================================================
-    function void end_of_elaboration_phase(uvm_phase phase);
+    virtual function void end_of_elaboration_phase(uvm_phase phase);
         super.end_of_elaboration_phase(phase);
         
         // Print full testbench topology with agent active/passive status
         uvm_top.print_topology();
-    endfunction
+    endfunction : end_of_elaboration_phase
 
 endclass

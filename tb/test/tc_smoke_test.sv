@@ -20,7 +20,7 @@ class tc_smoke_test extends base_test;
     endfunction
 
     //========================================================
-    task run_phase(uvm_phase phase);
+    virtual task run_phase(uvm_phase phase);
         phase.raise_objection(this);
 
         `uvm_info("SMOKE_TEST", "Starting smoke test on Master 1", UVM_LOW)
