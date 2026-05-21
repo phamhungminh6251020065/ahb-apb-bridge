@@ -69,7 +69,8 @@ class ahb_base_seq extends uvm_sequence #(ahb_trans);
 
     task do_reset();
         `uvm_info("SEQ", "Applying RESET", UVM_LOW)
-        vif.reset_dut();
+        p_sequencer.vif.reset_dut();
+        // vif.reset_dut();
     endtask
 
 endclass

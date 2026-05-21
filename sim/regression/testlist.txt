@@ -22,3 +22,6 @@ tc_bridge_cross_slave
 tc_arb_fixed_m1_wins
 tc_arb_round_robin
 tc_func_data_isolation
+tc_func_random_m1
+tc_func_timer_irq_e2e
+tc_func_reset_recovery

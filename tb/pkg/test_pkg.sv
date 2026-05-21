@@ -34,4 +34,7 @@ package test_pkg;
     `include "tc_arb_fixed_m1_wins.sv"
     `include "tc_arb_round_robin.sv"
     `include "tc_func_data_isolation.sv"
+    `include "tc_func_random_m1.sv"
+    `include "tc_func_timer_irq_e2e.sv"
+    `include "tc_func_reset_recovery.sv"
 endpackage : test_pkg

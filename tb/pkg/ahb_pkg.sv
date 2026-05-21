@@ -32,4 +32,7 @@ package ahb_pkg;
     `include "arb_fixed_m1_wins_seq.sv"
     `include "arb_round_robin_seq.sv"
     `include "func_data_isolation_seq.sv"
+    `include "func_random_m1_seq.sv"
+    `include "func_timer_irq_e2e_seq.sv"
+    `include "func_reset_recovery_seq.sv"
 endpackage : ahb_pkg

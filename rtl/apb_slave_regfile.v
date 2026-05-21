@@ -41,7 +41,8 @@ module apb_slave_regfile (
     // Luôn trả về 1 cho PREADY và 0 cho PSLVERR
     assign PREADY = 1'b1;
     // assign PSLVERR = 1'b0;
-    assign addr_valid = (PADDR[15:0] <= 16'h001C); // Địa chỉ hợp lệ khi PADDR[11:0] là 0x000, 0x004, ..., 0x01C
+    //assign addr_valid = (PADDR[15:0] <= 16'h001C); // Địa chỉ hợp lệ khi PADDR[11:0] là 0x000, 0x004, ..., 0x01C
+    assign addr_valid = (PADDR[15:5] == 11'b0) && (PADDR[1:0] == 2'b00);
     // assign addr_valid = (PADDR[1:0] == 2'b00) && (PADDR[4:2] <= 3'b111);
     // ── Write logic (sequential) ─────────────────────────────────────────────
     // Ghi vào mem khi PSEL=1, PENABLE=1, PWRITE=1 (ACCESS phase của write)
