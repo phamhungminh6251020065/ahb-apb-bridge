@@ -1,5 +1,6 @@
 import subprocess
 import os
+import re
 from datetime import datetime
 
 TESTLIST = "regression/testlist.txt"
@@ -58,11 +59,16 @@ for test in tests:
         with open(log_file, "r", errors="ignore") as lf:
             log = lf.read()
 
-            if "TEST PASSED" in log:
-                status = "PASS"
+            has_uvm_error = (
+                re.search(r"#\s*UVM_(ERROR|FATAL)\s+(?!:)", log) or
+                re.search(r"UVM_(ERROR|FATAL)[ \t]*:[ \t]*[1-9][0-9]*", log)
+            )
 
-            elif "TEST FAILED" in log or "UVM_ERROR" in log:
+            if "TEST FAILED" in log or has_uvm_error:
                 status = "FAIL"
+
+            elif "TEST PASSED" in log:
+                status = "PASS"
 
     # COUNT
     if status == "PASS":

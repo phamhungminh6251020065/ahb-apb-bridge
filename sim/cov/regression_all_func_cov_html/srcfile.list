@@ -1,0 +1,2 @@
+../tb/env/coverage.sv
+../tb/pkg/env_pkg.sv

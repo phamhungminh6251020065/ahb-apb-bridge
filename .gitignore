@@ -11,6 +11,9 @@ transcript
 *.vcd
 *.fsdb
 
+# Coverage
+sim/cov
+
 # temp
 temp/
 

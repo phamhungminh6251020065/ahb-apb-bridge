@@ -1,0 +1,80 @@
+var g_data = {
+f41:{
+scopes:[{link:'z.htm?f=0&s=41',val:'work.bridge_fsm'}]
+,FSMs:[{dummy:0}
+,{anchor:'cvg118',items:[{c:'Y',p:'53.40',z:'state'}
+,{cr:'c',s:'1',z:'ST_IDLE',h:'519',c:'g'}
+,{cr:'c',z:'ST_IDLE -> ST_WWAIT',h:'109',c:'g'}
+,{cr:'c',z:'ST_IDLE -> ST_READ',h:'109',c:'g'}
+,{cr:'c',s:'1',z:'ST_WWAIT',h:'109',c:'g'}
+,{cr:'m',z:'ST_WWAIT -> ST_WRITEP',h:'0',c:'r'}
+,{cr:'c',z:'ST_WWAIT -> ST_WRITE',h:'109',c:'g'}
+,{cr:'m',z:'ST_WWAIT -> ST_IDLE',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ST_READ',h:'109',c:'g'}
+,{cr:'c',z:'ST_READ -> ST_RENABLE',h:'109',c:'g'}
+,{cr:'m',z:'ST_READ -> ST_IDLE',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ST_RENABLE',h:'109',c:'g'}
+,{cr:'m',z:'ST_RENABLE -> ST_WWAIT',h:'0',c:'r'}
+,{cr:'m',z:'ST_RENABLE -> ST_READ',h:'0',c:'r'}
+,{cr:'c',z:'ST_RENABLE -> ST_IDLE',h:'109',c:'g'}
+,{cr:'m',s:'1',z:'ST_WRITEP',h:'0',c:'r'}
+,{cr:'m',z:'ST_WRITEP -> ST_WENABLEP',h:'0',c:'r'}
+,{cr:'m',z:'ST_WRITEP -> ST_IDLE',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ST_WRITE',h:'109',c:'g'}
+,{cr:'m',z:'ST_WRITE -> ST_WENABLEP',h:'0',c:'r'}
+,{cr:'c',z:'ST_WRITE -> ST_WENABLE',h:'109',c:'g'}
+,{cr:'m',z:'ST_WRITE -> ST_IDLE',h:'0',c:'r'}
+,{cr:'m',s:'1',z:'ST_WENABLEP',h:'0',c:'r'}
+,{cr:'m',z:'ST_WENABLEP -> ST_WRITEP',h:'0',c:'r'}
+,{cr:'m',z:'ST_WENABLEP -> ST_WRITE',h:'0',c:'r'}
+,{cr:'m',z:'ST_WENABLEP -> ST_READ',h:'0',c:'r'}
+,{cr:'m',z:'ST_WENABLEP -> ST_IDLE',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ST_WENABLE',h:'109',c:'g'}
+,{cr:'m',z:'ST_WENABLE -> ST_WWAIT',h:'0',c:'r'}
+,{cr:'m',z:'ST_WENABLE -> ST_READ',h:'0',c:'r'}
+,{cr:'c',z:'ST_WENABLE -> ST_IDLE',h:'109',c:'g'}
+]}
+
+],
+},
+f90:{
+scopes:[{s:'46',b:'1',val:'tb_top'},{s:'57',b:'1',val:'dut'},{s:'79',b:'1',val:'bridge_inst'},{link:'z.htm?f=0&s=90',val:'fsm'}]
+,FSMs:[{dummy:0}
+,{anchor:'cvg118',items:[{c:'Y',p:'53.40',z:'state'}
+,{cr:'c',s:'1',z:'ST_IDLE',h:'519',c:'g'}
+,{cr:'c',z:'ST_IDLE -> ST_WWAIT',h:'109',c:'g'}
+,{cr:'c',z:'ST_IDLE -> ST_READ',h:'109',c:'g'}
+,{cr:'c',s:'1',z:'ST_WWAIT',h:'109',c:'g'}
+,{cr:'m',z:'ST_WWAIT -> ST_WRITEP',h:'0',c:'r'}
+,{cr:'c',z:'ST_WWAIT -> ST_WRITE',h:'109',c:'g'}
+,{cr:'m',z:'ST_WWAIT -> ST_IDLE',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ST_READ',h:'109',c:'g'}
+,{cr:'c',z:'ST_READ -> ST_RENABLE',h:'109',c:'g'}
+,{cr:'m',z:'ST_READ -> ST_IDLE',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ST_RENABLE',h:'109',c:'g'}
+,{cr:'m',z:'ST_RENABLE -> ST_WWAIT',h:'0',c:'r'}
+,{cr:'m',z:'ST_RENABLE -> ST_READ',h:'0',c:'r'}
+,{cr:'c',z:'ST_RENABLE -> ST_IDLE',h:'109',c:'g'}
+,{cr:'m',s:'1',z:'ST_WRITEP',h:'0',c:'r'}
+,{cr:'m',z:'ST_WRITEP -> ST_WENABLEP',h:'0',c:'r'}
+,{cr:'m',z:'ST_WRITEP -> ST_IDLE',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ST_WRITE',h:'109',c:'g'}
+,{cr:'m',z:'ST_WRITE -> ST_WENABLEP',h:'0',c:'r'}
+,{cr:'c',z:'ST_WRITE -> ST_WENABLE',h:'109',c:'g'}
+,{cr:'m',z:'ST_WRITE -> ST_IDLE',h:'0',c:'r'}
+,{cr:'m',s:'1',z:'ST_WENABLEP',h:'0',c:'r'}
+,{cr:'m',z:'ST_WENABLEP -> ST_WRITEP',h:'0',c:'r'}
+,{cr:'m',z:'ST_WENABLEP -> ST_WRITE',h:'0',c:'r'}
+,{cr:'m',z:'ST_WENABLEP -> ST_READ',h:'0',c:'r'}
+,{cr:'m',z:'ST_WENABLEP -> ST_IDLE',h:'0',c:'r'}
+,{cr:'c',s:'1',z:'ST_WENABLE',h:'109',c:'g'}
+,{cr:'m',z:'ST_WENABLE -> ST_WWAIT',h:'0',c:'r'}
+,{cr:'m',z:'ST_WENABLE -> ST_READ',h:'0',c:'r'}
+,{cr:'c',z:'ST_WENABLE -> ST_IDLE',h:'109',c:'g'}
+]}
+
+],
+},
+dummyEnd:0
+};
+processFsmData(g_data);
