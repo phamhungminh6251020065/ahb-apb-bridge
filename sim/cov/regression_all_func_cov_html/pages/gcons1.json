@@ -1,9 +1,0 @@
-var g_db_data = [
-{dummy:0},
-{name:'ahb_trans_cg',f:1,type:6,id:1233,tb:'17',h:'17',m:'0',hp:'100.00%',cov:['100.00%','G'],g:'100.00%',gp:['100.00%','G'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/env_pkg/coverage',parent:'1224'},
-{name:'apb_trans_cg',f:1,type:6,id:1245,tb:'13',h:'13',m:'0',hp:'100.00%',cov:['100.00%','G'],g:'100.00%',gp:['100.00%','G'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/env_pkg/coverage',parent:'1224'},
-{name:'bridge_fsm_cg',f:1,type:6,id:1255,tb:'8',h:'0',m:'8',hp:'0.00%',cov:['0.00%','R'],g:'100.00%',gp:['0.00%','R'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/env_pkg/coverage',parent:'1224'},
-{name:'arb_cg',f:1,type:6,id:1259,tb:'2',h:'2',m:'0',hp:'100.00%',cov:['100.00%','G'],g:'100.00%',gp:['100.00%','G'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/env_pkg/coverage',parent:'1224'},
-{name:'gpio_cg',f:1,type:6,id:1263,tb:'256',h:'8',m:'248',hp:'3.12%',cov:['3.12%','R'],g:'100.00%',gp:['3.12%','R'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/env_pkg/coverage',parent:'1224'},
-{name:'timer_cg',f:1,type:6,id:1267,tb:'5',h:'3',m:'2',hp:'60.00%',cov:['66.66%','Y'],g:'100.00%',gp:['66.66%','Y'],opts:[[],['merge_instance','auto(true)']],hdlPath:'/env_pkg/coverage',parent:'1224'}];
-processConsCovergroupsData(g_db_data);

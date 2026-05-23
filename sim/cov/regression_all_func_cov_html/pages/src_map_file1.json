@@ -1,3 +1,0 @@
-var g_data = {'dummy':null,
-'1':'../tb/env/coverage.sv',
-'2':'../tb/pkg/env_pkg.sv'};
