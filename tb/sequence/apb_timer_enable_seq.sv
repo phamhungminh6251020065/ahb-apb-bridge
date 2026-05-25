@@ -23,6 +23,7 @@ class apb_timer_enable_seq extends ahb_base_seq;
 
         // Ghi vào các register của Timer
         do_write(32'h4001_0008, 32'h0000_000A); // PERIOD = 10
+        do_write(32'h4001_0004, 32'hDEAD_BEEF); // CNT_REG is read-only, write should be ignored
         do_write(32'h4001_0000, 32'h0000_0001); // CTRL[0] = 1 (enable timer)
 
         // Đợi một vài chu kỳ để timer bắt đầu đếm

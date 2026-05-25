@@ -1,3 +1,8 @@
+//==============================================================================
+// File    : coverage.sv
+// Project : AHB-to-APB Bridge
+//==============================================================================
+
 class coverage extends uvm_component;
     `uvm_component_utils(coverage)
 
@@ -11,13 +16,13 @@ class coverage extends uvm_component;
     uvm_analysis_imp_apb #(apb_trans, coverage) apb_export;
 
     //========================================================
-    // Last transaction for sampling
+    // Transaction handles
     //========================================================
     ahb_trans ahb_tr;
     apb_trans apb_tr;
 
     //========================================================
-    // C1 : AHB TRANS COVERGROUP
+    // C1 : AHB TRANSACTION COVERAGE
     //========================================================
     covergroup ahb_trans_cg;
 
@@ -58,7 +63,7 @@ class coverage extends uvm_component;
         }
 
         //--------------------------------------------
-        // Cross Coverage
+        // Cross coverage
         //--------------------------------------------
         cross_rw_addr : cross cp_rw, cp_addr;
 
@@ -67,7 +72,7 @@ class coverage extends uvm_component;
     endgroup : ahb_trans_cg
 
     //========================================================
-    // C2 : APB TRANS COVERGROUP
+    // C2 : APB TRANSACTION COVERAGE
     //========================================================
     covergroup apb_trans_cg;
 
@@ -92,7 +97,7 @@ class coverage extends uvm_component;
         }
 
         //--------------------------------------------
-        // APB Error
+        // PSLVERR
         //--------------------------------------------
         cp_error : coverpoint apb_tr.pslverr {
             bins OK  = {0};
@@ -107,91 +112,124 @@ class coverage extends uvm_component;
     endgroup : apb_trans_cg
 
     //========================================================
-    // C3 : BRIDGE FSM COVERGROUP
+    // C3 : BRIDGE PATH COVERAGE
     //========================================================
-    // Sample FSM state từ DUT
-    // Ví dụ:
-    // IDLE=0 SETUP=1 ACCESS=2 ...
-    //========================================================
-    logic [2:0] bridge_state;
-
     covergroup bridge_fsm_cg;
 
         option.per_instance = 1;
 
-        cp_state : coverpoint bridge_state {
-
-            bins ST_IDLE     = {0};
-            bins ST_READ     = {1};
-            bins ST_WWAIT    = {2};
-            bins ST_WRITE    = {3};
-            bins ST_WRITEP   = {4};
-            bins ST_RENABLE  = {5};
-            bins ST_WENABLE  = {6};
-            bins ST_WENABLEP = {7};
+        //--------------------------------------------
+        // Read path / Write path
+        //--------------------------------------------
+        cp_path : coverpoint apb_tr.pwrite {
+            bins READ_PATH  = {0};
+            bins WRITE_PATH = {1};
         }
+
+        //--------------------------------------------
+        // Slave path
+        //--------------------------------------------
+        cp_slave : coverpoint apb_tr.slave_id {
+
+            bins GPIO    = {1};
+            bins TIMER   = {2};
+            bins REGFILE = {3};
+        }
+
+        //--------------------------------------------
+        // Cross
+        //--------------------------------------------
+        cross_slave_path : cross cp_slave, cp_path;
 
     endgroup : bridge_fsm_cg
 
     //========================================================
-    // C4 : ARBITRATION COVERGROUP
+    // C4 : ARBITRATION COVERAGE
     //========================================================
     covergroup arb_cg;
 
         option.per_instance = 1;
 
-        cp_master_grant : coverpoint ahb_tr.master_id {
+        //--------------------------------------------
+        // Granted master
+        //--------------------------------------------
+        cp_master : coverpoint ahb_tr.master_id {
 
-            bins M1_ONLY = {0};
-            bins M2_ONLY = {1};
+            bins M1 = {0};
+            bins M2 = {1};
         }
+
+        //--------------------------------------------
+        // Address region
+        //--------------------------------------------
+        cp_addr : coverpoint ahb_tr.haddr {
+
+            bins GPIO = {
+                [32'h4000_0000 : 32'h4000_FFFF]
+            };
+
+            bins TIMER = {
+                [32'h4001_0000 : 32'h4001_FFFF]
+            };
+
+            bins REGFILE = {
+                [32'h4002_0000 : 32'h4002_FFFF]
+            };
+        }
+
+        //--------------------------------------------
+        // Cross
+        //--------------------------------------------
+        cross_master_addr : cross cp_master, cp_addr;
 
     endgroup : arb_cg
 
     //========================================================
-    // C5 : GPIO COVERGROUP
+    // C5 : GPIO COVERAGE
     //========================================================
     covergroup gpio_cg;
 
         option.per_instance = 1;
 
         //--------------------------------------------
-        // GPIO DATA
+        // GPIO data patterns
         //--------------------------------------------
         cp_gpio_data : coverpoint apb_tr.pwdata[7:0] {
 
-            bins ZERO = {8'h00};
-            bins FULL = {8'hFF};
+            bins ZERO  = {8'h00};
 
-            bins OTHERS[] = {[8'h01 : 8'hFE]};
+            bins FULL  = {8'hFF};
+
+            bins MIXED = {[8'h01 : 8'hFE]};
         }
 
     endgroup : gpio_cg
 
     //========================================================
-    // C6 : TIMER COVERGROUP
+    // C6 : TIMER COVERAGE
     //========================================================
     covergroup timer_cg;
 
         option.per_instance = 1;
 
         //--------------------------------------------
-        // TIMER ENABLE
+        // Timer enable
         //--------------------------------------------
         cp_timer_en : coverpoint apb_tr.pwdata[0] {
 
             bins DISABLE = {0};
+
             bins ENABLE  = {1};
         }
 
         //--------------------------------------------
-        // TIMER PERIOD
+        // Timer period
         //--------------------------------------------
         cp_timer_period : coverpoint apb_tr.pwdata {
 
-            bins SMALL  = {[1:10]};
-            bins MEDIUM = {[11:100]};
-            bins LARGE  = {[101:255]};
+            bins SMALL = {[1:15]};
+
+            bins LARGE = {[16:255]};
         }
 
     endgroup : timer_cg
@@ -203,12 +241,12 @@ class coverage extends uvm_component;
 
         super.new(name, parent);
 
-        ahb_trans_cg = new();
-        apb_trans_cg = new();
+        ahb_trans_cg  = new();
+        apb_trans_cg  = new();
         bridge_fsm_cg = new();
-        arb_cg = new();
-        gpio_cg = new();
-        timer_cg = new();
+        arb_cg        = new();
+        gpio_cg       = new();
+        timer_cg      = new();
 
     endfunction
 
@@ -220,12 +258,13 @@ class coverage extends uvm_component;
         super.build_phase(phase);
 
         ahb_export = new("ahb_export", this);
+
         apb_export = new("apb_export", this);
 
     endfunction
 
     //========================================================
-    // Sample AHB
+    // Sample AHB transaction
     //========================================================
     function void write_ahb(ahb_trans tr);
 
@@ -234,6 +273,7 @@ class coverage extends uvm_component;
         if (ahb_tr != null) begin
 
             ahb_trans_cg.sample();
+
             arb_cg.sample();
 
         end
@@ -241,7 +281,7 @@ class coverage extends uvm_component;
     endfunction
 
     //========================================================
-    // Sample APB
+    // Sample APB transaction
     //========================================================
     function void write_apb(apb_trans tr);
 
@@ -250,6 +290,8 @@ class coverage extends uvm_component;
         if (apb_tr != null) begin
 
             apb_trans_cg.sample();
+
+            bridge_fsm_cg.sample();
 
             //----------------------------------------
             // GPIO coverage
@@ -272,36 +314,73 @@ class coverage extends uvm_component;
     //========================================================
     function void report_phase(uvm_phase phase);
 
+        real total_cov;
+
+        total_cov =
+            (
+                ahb_trans_cg.get_coverage()  +
+                apb_trans_cg.get_coverage()  +
+                bridge_fsm_cg.get_coverage() +
+                arb_cg.get_coverage()        +
+                gpio_cg.get_coverage()       +
+                timer_cg.get_coverage()
+            ) / 6.0;
+
         `uvm_info("COV",
-            $sformatf("AHB TRANS Coverage = %0.2f%%",
+            "============================================",
+            UVM_LOW)
+
+        `uvm_info("COV",
+            "        FUNCTIONAL COVERAGE REPORT",
+            UVM_LOW)
+
+        `uvm_info("COV",
+            "============================================",
+            UVM_LOW)
+
+        `uvm_info("COV",
+            $sformatf("AHB TRANS Coverage   = %0.2f%%",
             ahb_trans_cg.get_coverage()),
             UVM_LOW)
 
         `uvm_info("COV",
-            $sformatf("APB TRANS Coverage = %0.2f%%",
+            $sformatf("APB TRANS Coverage   = %0.2f%%",
             apb_trans_cg.get_coverage()),
             UVM_LOW)
 
         `uvm_info("COV",
-            $sformatf("BRIDGE FSM Coverage = %0.2f%%",
+            $sformatf("BRIDGE PATH Coverage = %0.2f%%",
             bridge_fsm_cg.get_coverage()),
             UVM_LOW)
 
         `uvm_info("COV",
-            $sformatf("ARB Coverage = %0.2f%%",
+            $sformatf("ARB Coverage         = %0.2f%%",
             arb_cg.get_coverage()),
             UVM_LOW)
 
         `uvm_info("COV",
-            $sformatf("GPIO Coverage = %0.2f%%",
+            $sformatf("GPIO Coverage        = %0.2f%%",
             gpio_cg.get_coverage()),
             UVM_LOW)
 
         `uvm_info("COV",
-            $sformatf("TIMER Coverage = %0.2f%%",
+            $sformatf("TIMER Coverage       = %0.2f%%",
             timer_cg.get_coverage()),
+            UVM_LOW)
+
+        `uvm_info("COV",
+            "--------------------------------------------",
+            UVM_LOW)
+
+        `uvm_info("COV",
+            $sformatf("TOTAL Coverage       = %0.2f%%",
+            total_cov),
+            UVM_LOW)
+
+        `uvm_info("COV",
+            "============================================",
             UVM_LOW)
 
     endfunction
 
-endclass
+endclass : coverage

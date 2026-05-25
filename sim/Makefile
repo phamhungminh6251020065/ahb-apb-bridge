@@ -81,22 +81,22 @@ COV_DIR=$(WORK_DIR)/cov
 UCDB=$(COV_DIR)/$(TEST).ucdb
 
 # Functional coverage reports
-FUNC_COV_TXT=$(COV_DIR)/$(TEST)_func_cov.txt
+FUNC_COV_TXT=$(COV_DIR)/$(TEST)_func_cov.log
 FUNC_COV_HTML=$(COV_DIR)/$(TEST)_func_cov_html
 
 # Code coverage reports
-CODE_COV_TXT=$(COV_DIR)/$(TEST)_code_cov.txt
+CODE_COV_TXT=$(COV_DIR)/$(TEST)_code_cov.log
 CODE_COV_HTML=$(COV_DIR)/$(TEST)_code_cov_html
 
 # Merged regression coverage database
 MERGED_UCDB=$(COV_DIR)/regression_all.ucdb
 
 # Merged regression functional coverage reports
-MERGED_FUNC_COV_TXT=$(COV_DIR)/regression_all_func_cov.txt
+MERGED_FUNC_COV_TXT=$(COV_DIR)/regression_all_func_cov.log
 MERGED_FUNC_COV_HTML=$(COV_DIR)/regression_all_func_cov_html
 
 # Merged regression code coverage reports
-MERGED_CODE_COV_TXT=$(COV_DIR)/regression_all_code_cov.txt
+MERGED_CODE_COV_TXT=$(COV_DIR)/regression_all_code_cov.log
 MERGED_CODE_COV_HTML=$(COV_DIR)/regression_all_code_cov_html
 
 # All UCDB files except merged database
@@ -265,7 +265,7 @@ cov:
 	vcover report \
 	    $(UCDB) \
 	    -details \
-	    -output $(COV_DIR)/$(TEST)_cov.txt
+	    -output $(COV_DIR)/$(TEST)_cov.log
 
 
 #===============================================================================

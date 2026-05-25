@@ -1,5 +1,8 @@
 base_test
 tc_smoke_test
+tc_smoke_test_m2
+tc_smoke_test_rr
+tc_smoke_test_both
 tc_reset_all_regs
 tc_reset_mid_transfer
 tc_apb_pslverr
