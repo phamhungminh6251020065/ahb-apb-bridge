@@ -27,7 +27,13 @@ RESET  = "\033[0m"
 #====================================
 
 with open(TESTLIST, "r") as f:
-    tests = [line.strip() for line in f if line.strip()]
+    tests = []
+
+    for line in f:
+        test = line.split("#", 1)[0].strip()
+
+        if test:
+            tests.append(test)
 
 reg_start = datetime.now()
 

@@ -35,4 +35,7 @@ package ahb_pkg;
     `include "func_random_m1_seq.sv"
     `include "func_timer_irq_e2e_seq.sv"
     `include "func_reset_recovery_seq.sv"
+    // `include "cov_gpio_zero_timer_large_seq.sv"
+    // `include "cov_timer_invalid_offset_seq.sv"
+    // `include "cov_bridge_pipeline_seq.sv"
 endpackage : ahb_pkg

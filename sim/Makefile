@@ -277,7 +277,7 @@ func_cov:
 
 	# Text report
 	vcover report \
-	    -cvg -details -zeros \
+	    -cvg -covered -details \
 	    -output $(FUNC_COV_TXT) \
 	    $(UCDB)
 
@@ -296,14 +296,14 @@ code_cov:
 	mkdir -p $(COV_DIR)
 
 	# Text report
-	vcover report \
-	    -code bcesf -details -zeros \
+	MSYS2_ARG_CONV_EXCL=/tb_top/dut vcover report \
+	    -code bcesf -details -zeros -instance /tb_top/dut -recursive \
 	    -output $(CODE_COV_TXT) \
 	    $(UCDB)
 
 	# HTML report
-	vcover report \
-	    -html -code bcesf -details \
+	MSYS2_ARG_CONV_EXCL=/tb_top/dut vcover report \
+	    -html -code bcesf -details -instance /tb_top/dut \
 	    -htmldir $(CODE_COV_HTML) \
 	    $(UCDB)
 
@@ -325,7 +325,7 @@ merge_cov:
 regression_func_cov: merge_cov
 
 	vcover report \
-	    -cvg -details -zeros \
+	    -cvg -covered -details \
 	    -output $(MERGED_FUNC_COV_TXT) \
 	    $(MERGED_UCDB)
 
@@ -341,13 +341,13 @@ regression_func_cov: merge_cov
 
 regression_code_cov: merge_cov
 
-	vcover report \
-	    -code bcesf -details -zeros \
+	MSYS2_ARG_CONV_EXCL=/tb_top/dut vcover report \
+	    -code bcesf -details -zeros -instance /tb_top/dut -recursive \
 	    -output $(MERGED_CODE_COV_TXT) \
 	    $(MERGED_UCDB)
-
-	vcover report \
-	    -html -code bcesf -details \
+		
+	MSYS2_ARG_CONV_EXCL=/tb_top/dut vcover report \
+	    -html -code bcesf -details -instance /tb_top/dut \
 	    -htmldir $(MERGED_CODE_COV_HTML) \
 	    $(MERGED_UCDB)
 

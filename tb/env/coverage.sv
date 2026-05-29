@@ -235,6 +235,63 @@ class coverage extends uvm_component;
     endgroup : timer_cg
 
     //========================================================
+    // C7 : REGFILE COVERAGE
+    //========================================================
+    covergroup regfile_cg;
+
+        option.per_instance = 1;
+
+        //--------------------------------------------
+        // Register offset
+        //--------------------------------------------
+        cp_reg_offset : coverpoint apb_tr.paddr[4:2] {
+
+            bins REG0 = {3'd0};
+            bins REG1 = {3'd1};
+            bins REG2 = {3'd2};
+            bins REG3 = {3'd3};
+            bins REG4 = {3'd4};
+            bins REG5 = {3'd5};
+            bins REG6 = {3'd6};
+            bins REG7 = {3'd7};
+        }
+
+        //--------------------------------------------
+        // Read / Write
+        //--------------------------------------------
+        cp_rw : coverpoint apb_tr.pwrite {
+
+            bins READ  = {0};
+            bins WRITE = {1};
+        }
+
+        //--------------------------------------------
+        // Write data pattern
+        //--------------------------------------------
+        cp_wdata : coverpoint apb_tr.pwdata iff (apb_tr.pwrite) {
+
+            bins ZERO  = {32'h0000_0000};
+            bins FULL  = {32'hFFFF_FFFF};
+            bins MIXED = {[32'h0000_0001 : 32'hFFFF_FFFE]};
+        }
+
+        //--------------------------------------------
+        // Regfile error response
+        //--------------------------------------------
+        cp_error : coverpoint apb_tr.pslverr {
+
+            bins OK  = {0};
+            bins ERR = {1};
+        }
+
+        //--------------------------------------------
+        // Cross
+        //--------------------------------------------
+        cross_reg_rw : cross cp_reg_offset, cp_rw;
+
+    endgroup : regfile_cg
+
+    //========================================================
     // Constructor
     //========================================================
     function new(string name, uvm_component parent);
@@ -247,6 +304,7 @@ class coverage extends uvm_component;
         arb_cg        = new();
         gpio_cg       = new();
         timer_cg      = new();
+        regfile_cg    = new();
 
     endfunction
 
@@ -305,6 +363,12 @@ class coverage extends uvm_component;
             if (apb_tr.slave_id == 2)
                 timer_cg.sample();
 
+            //----------------------------------------
+            // REGFILE coverage
+            //----------------------------------------
+            if (apb_tr.slave_id == 3)
+                regfile_cg.sample();
+
         end
 
     endfunction
@@ -323,8 +387,9 @@ class coverage extends uvm_component;
                 bridge_fsm_cg.get_coverage() +
                 arb_cg.get_coverage()        +
                 gpio_cg.get_coverage()       +
-                timer_cg.get_coverage()
-            ) / 6.0;
+                timer_cg.get_coverage()      +
+                regfile_cg.get_coverage()
+            ) / 7.0;
 
         `uvm_info("COV",
             "============================================",
@@ -366,6 +431,11 @@ class coverage extends uvm_component;
         `uvm_info("COV",
             $sformatf("TIMER Coverage       = %0.2f%%",
             timer_cg.get_coverage()),
+            UVM_LOW)
+
+        `uvm_info("COV",
+            $sformatf("REGFILE Coverage     = %0.2f%%",
+            regfile_cg.get_coverage()),
             UVM_LOW)
 
         `uvm_info("COV",

@@ -37,4 +37,7 @@ package test_pkg;
     `include "tc_func_random_m1.sv"
     `include "tc_func_timer_irq_e2e.sv"
     `include "tc_func_reset_recovery.sv"
+    // `include "tc_cov_gpio_zero_timer_large.sv"
+    // `include "tc_cov_timer_invalid_offset.sv"
+    // `include "tc_cov_bridge_pipeline.sv"
 endpackage : test_pkg
