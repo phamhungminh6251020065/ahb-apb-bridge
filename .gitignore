@@ -17,6 +17,9 @@ sim/cov
 # temp
 temp/
 
+# synthesis
+synth/
+
 # OS
 .DS_Store
 Thumbs.db

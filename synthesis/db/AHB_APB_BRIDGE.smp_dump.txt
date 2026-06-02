@@ -1,0 +1,11 @@
+
+State Machine - |dut_top|bridge_top:bridge_inst|bridge_fsm:fsm|state
+Name state.ST_WENABLEP state.ST_WENABLE state.ST_RENABLE state.ST_WRITEP state.ST_WRITE state.ST_WWAIT state.ST_READ state.ST_IDLE 
+state.ST_IDLE 0 0 0 0 0 0 0 0 
+state.ST_READ 0 0 0 0 0 0 1 1 
+state.ST_WWAIT 0 0 0 0 0 1 0 1 
+state.ST_WRITE 0 0 0 0 1 0 0 1 
+state.ST_WRITEP 0 0 0 1 0 0 0 1 
+state.ST_RENABLE 0 0 1 0 0 0 0 1 
+state.ST_WENABLE 0 1 0 0 0 0 0 1 
+state.ST_WENABLEP 1 0 0 0 0 0 0 1 
