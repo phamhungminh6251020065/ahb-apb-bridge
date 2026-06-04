@@ -6,9 +6,9 @@ tc_smoke_test_both
 tc_reset_all_regs
 tc_reset_mid_transfer
 tc_apb_pslverr
-tc_smoke_test_both
 tc_apb_gpio_write_all
 tc_apb_gpio_read_output
+tc_apb_gpio_read_input
 tc_apb_timer_enable
 tc_apb_timer_irq
 tc_apb_timer_disable

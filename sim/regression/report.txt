@@ -6,45 +6,45 @@ Total testcase run : 30
 Passed             : 27
 Failed             : 3
 Unknown            : 0
-Used time          : 1m 41s
+Used time          : 1m 53s
 ------------------------------------------------------------
 
 Run summary:
 
-+-------------------------------------+----------+---------------------+
-| TESTCASE                            | RESULT   | RUN DATE            |
-+-------------------------------------+----------+---------------------+
-| base_test                           | PASS     | 03-06-2026 01:58:22 |
-| tc_smoke_test                       | PASS     | 03-06-2026 01:58:26 |
-| tc_smoke_test_m2                    | PASS     | 03-06-2026 01:58:29 |
-| tc_smoke_test_rr                    | PASS     | 03-06-2026 01:58:32 |
-| tc_smoke_test_both                  | PASS     | 03-06-2026 01:58:36 |
-| tc_reset_all_regs                   | PASS     | 03-06-2026 01:58:39 |
-| tc_reset_mid_transfer               | PASS     | 03-06-2026 01:58:43 |
-| tc_apb_pslverr                      | FAIL     | 03-06-2026 01:58:46 |
-| tc_smoke_test_both                  | PASS     | 03-06-2026 01:58:50 |
-| tc_apb_gpio_write_all               | PASS     | 03-06-2026 01:58:53 |
-| tc_apb_gpio_read_output             | PASS     | 03-06-2026 01:58:56 |
-| tc_apb_timer_enable                 | PASS     | 03-06-2026 01:59:00 |
-| tc_apb_timer_irq                    | PASS     | 03-06-2026 01:59:03 |
-| tc_apb_timer_disable                | PASS     | 03-06-2026 01:59:07 |
-| tc_apb_regfile_all                  | PASS     | 03-06-2026 01:59:10 |
-| tc_ahb_wait_state                   | PASS     | 03-06-2026 01:59:13 |
-| tc_ahb_hresp_okay                   | PASS     | 03-06-2026 01:59:17 |
-| tc_ahb_invalid_addr                 | FAIL     | 03-06-2026 01:59:20 |
-| tc_ahb_busreq_grant                 | PASS     | 03-06-2026 01:59:23 |
-| tc_bridge_single_write_read         | PASS     | 03-06-2026 01:59:27 |
-| tc_bridge_addr_decode               | PASS     | 03-06-2026 01:59:30 |
-| tc_bridge_b2b_write_read            | PASS     | 03-06-2026 01:59:34 |
-| tc_bridge_unaligned_addr            | FAIL     | 03-06-2026 01:59:37 |
-| tc_bridge_cross_slave               | PASS     | 03-06-2026 01:59:40 |
-| tc_arb_fixed_m1_wins                | PASS     | 03-06-2026 01:59:44 |
-| tc_arb_round_robin                  | PASS     | 03-06-2026 01:59:47 |
-| tc_func_data_isolation              | PASS     | 03-06-2026 01:59:51 |
-| tc_func_random_m1                   | PASS     | 03-06-2026 01:59:54 |
-| tc_func_timer_irq_e2e               | PASS     | 03-06-2026 01:59:57 |
-| tc_func_reset_recovery              | PASS     | 03-06-2026 02:00:01 |
-+-------------------------------------+----------+---------------------+
++------+-------------------------------------+----------+---------------------+
+| No.  | TESTCASE                            | RESULT   | RUN DATE            |
++------+-------------------------------------+----------+---------------------+
+| 1    | base_test                           | PASS     | 05-06-2026 00:37:40 |
+| 2    | tc_smoke_test                       | PASS     | 05-06-2026 00:37:55 |
+| 3    | tc_smoke_test_m2                    | PASS     | 05-06-2026 00:37:59 |
+| 4    | tc_smoke_test_rr                    | PASS     | 05-06-2026 00:38:02 |
+| 5    | tc_smoke_test_both                  | PASS     | 05-06-2026 00:38:05 |
+| 6    | tc_reset_all_regs                   | PASS     | 05-06-2026 00:38:09 |
+| 7    | tc_reset_mid_transfer               | PASS     | 05-06-2026 00:38:12 |
+| 8    | tc_apb_pslverr                      | FAIL     | 05-06-2026 00:38:16 |
+| 9    | tc_apb_gpio_write_all               | PASS     | 05-06-2026 00:38:19 |
+| 10   | tc_apb_gpio_read_output             | PASS     | 05-06-2026 00:38:22 |
+| 11   | tc_apb_gpio_read_input              | PASS     | 05-06-2026 00:38:26 |
+| 12   | tc_apb_timer_enable                 | PASS     | 05-06-2026 00:38:29 |
+| 13   | tc_apb_timer_irq                    | PASS     | 05-06-2026 00:38:32 |
+| 14   | tc_apb_timer_disable                | PASS     | 05-06-2026 00:38:36 |
+| 15   | tc_apb_regfile_all                  | PASS     | 05-06-2026 00:38:39 |
+| 16   | tc_ahb_wait_state                   | PASS     | 05-06-2026 00:38:43 |
+| 17   | tc_ahb_hresp_okay                   | PASS     | 05-06-2026 00:38:46 |
+| 18   | tc_ahb_invalid_addr                 | FAIL     | 05-06-2026 00:38:49 |
+| 19   | tc_ahb_busreq_grant                 | PASS     | 05-06-2026 00:38:53 |
+| 20   | tc_bridge_single_write_read         | PASS     | 05-06-2026 00:38:56 |
+| 21   | tc_bridge_addr_decode               | PASS     | 05-06-2026 00:38:59 |
+| 22   | tc_bridge_b2b_write_read            | PASS     | 05-06-2026 00:39:03 |
+| 23   | tc_bridge_unaligned_addr            | FAIL     | 05-06-2026 00:39:06 |
+| 24   | tc_bridge_cross_slave               | PASS     | 05-06-2026 00:39:10 |
+| 25   | tc_arb_fixed_m1_wins                | PASS     | 05-06-2026 00:39:13 |
+| 26   | tc_arb_round_robin                  | PASS     | 05-06-2026 00:39:17 |
+| 27   | tc_func_data_isolation              | PASS     | 05-06-2026 00:39:20 |
+| 28   | tc_func_random_m1                   | PASS     | 05-06-2026 00:39:23 |
+| 29   | tc_func_timer_irq_e2e               | PASS     | 05-06-2026 00:39:27 |
+| 30   | tc_func_reset_recovery              | PASS     | 05-06-2026 00:39:30 |
++------+-------------------------------------+----------+---------------------+
 
 Run log detail:
 log/sim/base_test_simulate.log                     => Passed
@@ -55,9 +55,9 @@ log/sim/tc_smoke_test_both_simulate.log            => Passed
 log/sim/tc_reset_all_regs_simulate.log             => Passed
 log/sim/tc_reset_mid_transfer_simulate.log         => Passed
 log/sim/tc_apb_pslverr_simulate.log                => Failed
-log/sim/tc_smoke_test_both_simulate.log            => Passed
 log/sim/tc_apb_gpio_write_all_simulate.log         => Passed
 log/sim/tc_apb_gpio_read_output_simulate.log       => Passed
+log/sim/tc_apb_gpio_read_input_simulate.log        => Passed
 log/sim/tc_apb_timer_enable_simulate.log           => Passed
 log/sim/tc_apb_timer_irq_simulate.log              => Passed
 log/sim/tc_apb_timer_disable_simulate.log          => Passed
