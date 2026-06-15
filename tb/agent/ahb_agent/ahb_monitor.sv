@@ -67,6 +67,7 @@ class ahb_monitor extends uvm_monitor;
         tr.hsize  = vif.monitor_cb.HSIZE;
         tr.hburst = vif.monitor_cb.HBURST;
         tr.htrans = vif.monitor_cb.HTRANS;
+        tr.start_time = $time - 10; // address phase bắt đầu từ cycle trước (setup)
 
         // ── MOVE TO DATA PHASE ────────────────────
         @(vif.monitor_cb);
@@ -83,6 +84,7 @@ class ahb_monitor extends uvm_monitor;
             tr.hwdata = vif.monitor_cb.HWDATA;
         else
             tr.hrdata = vif.monitor_cb.HRDATA;
+        tr.end_time = $time;
 
         // ── SEND OUT ─────────────────────────────
         ap.write(tr);

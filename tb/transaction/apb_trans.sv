@@ -30,7 +30,8 @@ class apb_trans extends uvm_sequence_item;
 
     int          slave_id; // 1=GPIO,2=Timer,3=RegFile
     logic        is_access; // PENABLE phase
-    time         txn_time;
+    time         start_time;
+    time         end_time;
 
     `uvm_object_utils_begin(apb_trans)
         `uvm_field_int(paddr,     UVM_ALL_ON)
@@ -46,6 +47,8 @@ class apb_trans extends uvm_sequence_item;
         `uvm_field_int(psel3,     UVM_ALL_ON)
 
         `uvm_field_int(slave_id,  UVM_ALL_ON)
+        `uvm_field_int(start_time,UVM_ALL_ON)
+        `uvm_field_int(end_time,  UVM_ALL_ON)
 
     `uvm_object_utils_end
 

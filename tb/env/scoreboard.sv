@@ -96,7 +96,7 @@ class scoreboard extends uvm_scoreboard;
 
         bit pass;
 
-        time t;
+        // time t;
 
         forever begin
 
@@ -194,7 +194,7 @@ class scoreboard extends uvm_scoreboard;
             end
 
             //--------------------------------------------
-            t = $time;
+            // t = $time;
 
             master_str = $sformatf(
                 "Master%0d",
@@ -203,8 +203,9 @@ class scoreboard extends uvm_scoreboard;
             slave_str = apb_tr.get_slave_name();
 
             line = $sformatf(
-                "| %8t | %-7s | %-8s | %-4s | %08h | %-5s | %5s | %7s | %08h | %08h | %-5s  |",
-                t,
+                "| %7t | %7t | %-7s | %-8s | %-4s | %08h | %-5s | %5s | %7s | %08h | %08h | %-5s  |",
+                ahb_tr.start_time,
+                ahb_tr.end_time,
                 master_str,
                 slave_str,
                 "AHB",
@@ -243,8 +244,9 @@ class scoreboard extends uvm_scoreboard;
         slave_str  = "NONE";
 
         line = $sformatf(
-            "| %8t | %-7s | %-8s | %-4s | %08h | %-5s | %5s | %7s | %08h | %08h | %-5s  |",
-            t,
+            "| %7t | %7t | %-7s | %-8s | %-4s | %08h | %-5s | %5s | %7s | %08h | %08h | %-5s  |",
+            ahb_tr.start_time,
+            ahb_tr.end_time,
             master_str,
             slave_str,
             "AHB",
@@ -278,8 +280,9 @@ class scoreboard extends uvm_scoreboard;
         slave_str  = apb_tr.get_slave_name();
 
         line = $sformatf(
-            "| %8t | %-7s | %-8s | %-4s | %08h | %-5s | %5s | %7s | %08h | %08h | %-5s  |",
-            t,
+            "| %7t | %7t | %-7s | %-8s | %-4s | %08h | %-5s | %5s | %7s | %08h | %08h | %-5s  |",
+            apb_tr.start_time,
+            apb_tr.end_time,
             master_str,
             slave_str,
             "APB",
@@ -342,17 +345,17 @@ class scoreboard extends uvm_scoreboard;
         total = matched + failed;
 
         //--------------------------------------------
-        report_str = "\n============================================================================================================\n";
-        report_str = {report_str, "                             SCOREBOARD SUMMARY TABLE\n"};
-        report_str = {report_str, "============================================================================================================\n"};
-        report_str = {report_str, "|   TIME   | MASTER  |  SLAVE   | PROT |   ADDR   | TYPE  | HRESP | PSLVERR | AHB_DATA | APB_DATA | RESULT |\n"};
-        report_str = {report_str, "+----------+---------+----------+------+----------+-------+-------+---------+----------+----------+--------+\n"};
+        report_str = "\n=====================================================================================================================\n";
+        report_str = {report_str, "                                                 SCOREBOARD SUMMARY TABLE\n"};
+        report_str = {report_str, "=====================================================================================================================\n"};
+        report_str = {report_str, "| START_T |  END_T  | MASTER  |  SLAVE   | PROT |   ADDR   | TYPE  | HRESP | PSLVERR | AHB_DATA | APB_DATA | RESULT |\n"};
+        report_str = {report_str, "+---------+---------+---------+----------+------+----------+-------+-------+---------+----------+----------+--------+\n"};
 
         for (i = 0; i < summary_q.size(); i++) begin
             report_str = {report_str, summary_q[i], "\n"};
         end
 
-        report_str = {report_str, "+----------+---------+----------+------+----------+-------+-------+---------+----------+----------+--------+\n"};
+        report_str = {report_str, "+---------+---------+---------+----------+------+----------+-------+-------+---------+----------+----------+--------+\n"};
 
         report_str = {report_str,
             $sformatf(
@@ -362,7 +365,7 @@ class scoreboard extends uvm_scoreboard;
             failed)};
 
         report_str = {report_str,
-            "============================================================================================================\n"};
+            "=====================================================================================================================\n"};
 
         //--------------------------------------------
         // RESULT BANNER

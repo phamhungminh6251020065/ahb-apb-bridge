@@ -53,6 +53,8 @@ class apb_monitor extends uvm_monitor;
         // Create transaction
         tr = apb_trans::type_id::create("tr", this);
 
+        tr.start_time = $time - 10; // PENABLE=1 là ACCESS phase, bắt đầu từ cycle trước (setup)
+
         tr.paddr   = vif.monitor_cb.PADDR;
         tr.pwrite  = vif.monitor_cb.PWRITE;
         tr.pwdata  = vif.monitor_cb.PWDATA;
@@ -78,6 +80,7 @@ class apb_monitor extends uvm_monitor;
         end
 
         tr.decode_slave();
+        tr.end_time = $time;
 
         ap.write(tr);
         num_trans++;

@@ -31,6 +31,8 @@ class ahb_trans extends uvm_sequence_item;
     logic [1:0]  hresp;
     logic        hreadyout;
     int          master_id;
+    time         start_time;
+    time         end_time;
 
     `uvm_object_utils_begin(ahb_trans)
 
@@ -45,6 +47,8 @@ class ahb_trans extends uvm_sequence_item;
         `uvm_field_int(hresp,     UVM_ALL_ON)
         `uvm_field_int(hreadyout, UVM_ALL_ON)
         `uvm_field_int(master_id, UVM_ALL_ON)
+        `uvm_field_int(start_time,UVM_ALL_ON)
+        `uvm_field_int(end_time,  UVM_ALL_ON)
 
     `uvm_object_utils_end
 
