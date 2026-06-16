@@ -130,4 +130,24 @@ module tb_top #(
         run_test();
     end
 
+    // Dump waveforms for debugging
+    string testname;
+    string vcd_name;
+
+    initial begin
+
+        if (!$value$plusargs("TESTNAME=%s", testname))
+            testname = "default";
+
+        vcd_name = {"log/wave/", testname, ".vcd"};
+
+        $display("Dumping VCD: %s", vcd_name);
+
+        $dumpfile(vcd_name);
+
+        // dump DUT
+        $dumpvars(0, tb_top.dut);
+
+    end
+
 endmodule : tb_top

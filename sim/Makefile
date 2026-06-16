@@ -152,6 +152,7 @@ ARBITER_MODE ?= 0
 SIM_OPTIONS += +UVM_VERBOSITY=$(VERBOSITY)
 SIM_OPTIONS += -sv_seed $(SEED)
 SIM_OPTIONS += +UVM_TESTNAME=$(TEST)
+SIM_OPTIONS += +TESTNAME=$(TEST)
 SIM_OPTIONS += -GARBITER_MODE=$(ARBITER_MODE)
 
 
@@ -238,7 +239,7 @@ comp:
 #===============================================================================
 
 sim:
-	mkdir -p $(SIM_DIR) $(COV_DIR)
+	mkdir -p $(SIM_DIR) $(COV_DIR) $(WAVE_DIR)
 
 	# Run simulation and save UCDB coverage database
 	vsim -coverage -c \
