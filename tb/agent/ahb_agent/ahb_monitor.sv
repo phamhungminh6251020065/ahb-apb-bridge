@@ -84,7 +84,7 @@ class ahb_monitor extends uvm_monitor;
             tr.hwdata = vif.monitor_cb.HWDATA;
         else
             tr.hrdata = vif.monitor_cb.HRDATA;
-        tr.end_time = $time;
+        tr.end_time = $time + 20; // data phase kết thúc ở cycle sau (hold)
 
         // ── SEND OUT ─────────────────────────────
         ap.write(tr);

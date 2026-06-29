@@ -14,36 +14,36 @@ Run summary:
 +------+-------------------------------------+----------+---------------------+
 | No.  | TESTCASE                            | RESULT   | RUN DATE            |
 +------+-------------------------------------+----------+---------------------+
-| 1    | base_test                           | PASS     | 17-06-2026 01:21:28 |
-| 2    | tc_smoke_test                       | PASS     | 17-06-2026 01:21:32 |
-| 3    | tc_smoke_test_m2                    | PASS     | 17-06-2026 01:21:35 |
-| 4    | tc_smoke_test_rr                    | PASS     | 17-06-2026 01:21:39 |
-| 5    | tc_smoke_test_both                  | PASS     | 17-06-2026 01:21:42 |
-| 6    | tc_reset_all_regs                   | PASS     | 17-06-2026 01:21:46 |
-| 7    | tc_reset_mid_transfer               | PASS     | 17-06-2026 01:21:49 |
-| 8    | tc_apb_pslverr                      | FAIL     | 17-06-2026 01:21:53 |
-| 9    | tc_apb_gpio_write_all               | PASS     | 17-06-2026 01:21:57 |
-| 10   | tc_apb_gpio_read_output             | PASS     | 17-06-2026 01:22:00 |
-| 11   | tc_apb_gpio_read_input              | PASS     | 17-06-2026 01:22:04 |
-| 12   | tc_apb_timer_enable                 | PASS     | 17-06-2026 01:22:07 |
-| 13   | tc_apb_timer_irq                    | PASS     | 17-06-2026 01:22:11 |
-| 14   | tc_apb_timer_disable                | PASS     | 17-06-2026 01:22:14 |
-| 15   | tc_apb_regfile_all                  | PASS     | 17-06-2026 01:22:18 |
-| 16   | tc_ahb_wait_state                   | PASS     | 17-06-2026 01:22:22 |
-| 17   | tc_ahb_hresp_okay                   | PASS     | 17-06-2026 01:22:25 |
-| 18   | tc_ahb_invalid_addr                 | FAIL     | 17-06-2026 01:22:29 |
-| 19   | tc_ahb_busreq_grant                 | PASS     | 17-06-2026 01:22:32 |
-| 20   | tc_bridge_single_write_read         | PASS     | 17-06-2026 01:22:36 |
-| 21   | tc_bridge_addr_decode               | PASS     | 17-06-2026 01:22:39 |
-| 22   | tc_bridge_b2b_write_read            | PASS     | 17-06-2026 01:22:43 |
-| 23   | tc_bridge_unaligned_addr            | FAIL     | 17-06-2026 01:22:47 |
-| 24   | tc_bridge_cross_slave               | PASS     | 17-06-2026 01:22:50 |
-| 25   | tc_arb_fixed_m1_wins                | PASS     | 17-06-2026 01:22:53 |
-| 26   | tc_arb_round_robin                  | PASS     | 17-06-2026 01:22:57 |
-| 27   | tc_func_data_isolation              | PASS     | 17-06-2026 01:23:01 |
-| 28   | tc_func_random_m1                   | PASS     | 17-06-2026 01:23:04 |
-| 29   | tc_func_timer_irq_e2e               | PASS     | 17-06-2026 01:23:08 |
-| 30   | tc_func_reset_recovery              | PASS     | 17-06-2026 01:23:12 |
+| 1    | base_test                           | PASS     | 29-06-2026 22:25:34 |
+| 2    | tc_smoke_test                       | PASS     | 29-06-2026 22:25:37 |
+| 3    | tc_smoke_test_m2                    | PASS     | 29-06-2026 22:25:41 |
+| 4    | tc_smoke_test_rr                    | PASS     | 29-06-2026 22:25:45 |
+| 5    | tc_smoke_test_both                  | PASS     | 29-06-2026 22:25:48 |
+| 6    | tc_reset_all_regs                   | PASS     | 29-06-2026 22:25:52 |
+| 7    | tc_reset_mid_transfer               | PASS     | 29-06-2026 22:25:55 |
+| 8    | tc_apb_pslverr                      | FAIL     | 29-06-2026 22:25:59 |
+| 9    | tc_apb_gpio_write_all               | PASS     | 29-06-2026 22:26:02 |
+| 10   | tc_apb_gpio_read_output             | PASS     | 29-06-2026 22:26:06 |
+| 11   | tc_apb_gpio_read_input              | PASS     | 29-06-2026 22:26:10 |
+| 12   | tc_apb_timer_enable                 | PASS     | 29-06-2026 22:26:13 |
+| 13   | tc_apb_timer_irq                    | PASS     | 29-06-2026 22:26:17 |
+| 14   | tc_apb_timer_disable                | PASS     | 29-06-2026 22:26:20 |
+| 15   | tc_apb_regfile_all                  | PASS     | 29-06-2026 22:26:24 |
+| 16   | tc_ahb_wait_state                   | PASS     | 29-06-2026 22:26:27 |
+| 17   | tc_ahb_hresp_okay                   | PASS     | 29-06-2026 22:26:31 |
+| 18   | tc_ahb_invalid_addr                 | FAIL     | 29-06-2026 22:26:35 |
+| 19   | tc_ahb_busreq_grant                 | PASS     | 29-06-2026 22:26:38 |
+| 20   | tc_bridge_single_write_read         | PASS     | 29-06-2026 22:26:42 |
+| 21   | tc_bridge_addr_decode               | PASS     | 29-06-2026 22:26:45 |
+| 22   | tc_bridge_b2b_write_read            | PASS     | 29-06-2026 22:26:48 |
+| 23   | tc_bridge_unaligned_addr            | FAIL     | 29-06-2026 22:26:52 |
+| 24   | tc_bridge_cross_slave               | PASS     | 29-06-2026 22:26:55 |
+| 25   | tc_arb_fixed_m1_wins                | PASS     | 29-06-2026 22:26:59 |
+| 26   | tc_arb_round_robin                  | PASS     | 29-06-2026 22:27:02 |
+| 27   | tc_func_data_isolation              | PASS     | 29-06-2026 22:27:06 |
+| 28   | tc_func_random_m1                   | PASS     | 29-06-2026 22:27:10 |
+| 29   | tc_func_timer_irq_e2e               | PASS     | 29-06-2026 22:27:13 |
+| 30   | tc_func_reset_recovery              | PASS     | 29-06-2026 22:27:17 |
 +------+-------------------------------------+----------+---------------------+
 
 Run log detail:
