@@ -1,8 +1,6 @@
 ﻿# Thiết Kế AHB-to-APB Bridge và Kiểm Chứng UVM
-
-> **Đồ án tốt nghiệp**
-> **Sinh viên:** Phạm Hùng Minh - MSSV: 6251020065
-> **GVHD:** Lê Mạnh Tuấn
+ 
+> **Người thực hiện:** Phạm Hùng Minh
 > **Khoa Điện - Điện tử, Đại học Giao thông vận tải Phân hiệu TP.HCM**
 
 ---
